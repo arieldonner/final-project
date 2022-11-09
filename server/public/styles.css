@@ -1,7 +1,9 @@
 body {
   font-family: Inter, sans-serif;
   background-image: url("images/final-project-background.jpg");
-  background-size: 100%;
+  background-size: auto;
+  background-position: center -1100px;
+  background-repeat: no-repeat;
 }
 
 .cookie {
@@ -30,9 +32,48 @@ body {
 
 .brand {
   font-size: 2.5rem;
+  margin-left: 1rem;
 }
 
 .nav-container {
   background-color: #90caf9;
   height: 3.8rem;
+}
+
+.nav-links {
+  text-decoration: none;
+  font-size: 1.25rem;
+  color: white;
+}
+
+.nav-links:hover {
+  color: #1976d2;
+}
+
+.logout {
+  position: relative;
+  right: -1rem;
+}
+
+.fa-bars {
+  transform: scale(1.8);
+}
+
+.icon {
+  transform: scale(2);
+  cursor: pointer;
+}
+
+.nav-container-tall {
+  background-color: #90caf9;
+  height: 185px;
+}
+
+.fa-xmark {
+  transform: scale(2);
+}
+
+.brand-mobile {
+  font-size: 2.5rem;
+  margin-bottom: -0.5rem;
 }
