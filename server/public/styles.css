@@ -1,6 +1,7 @@
 body {
   font-family: Inter, sans-serif;
-  background-image: url("/server/public/images/final-project-background.jpg");
+  background-image: url("images/final-project-background.jpg");
+  background-size: 100%;
 }
 
 .cookie {
