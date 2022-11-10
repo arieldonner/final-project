@@ -21,7 +21,7 @@ CREATE TABLE "public"."events" (
 	"endDate" DATE NOT NULL,
 	"endTime" TIME NOT NULL,
 	"locationId" integer NOT NULL,
-	"outfitId" integer NOT NULL,
+	"outfitId" integer,
 	"userId" integer NOT NULL,
 	CONSTRAINT "events_pk" PRIMARY KEY ("eventId")
 ) WITH (
@@ -34,9 +34,9 @@ CREATE TABLE "public"."outfits" (
 	"outfitImg" TEXT NOT NULL,
 	"outfitName" TEXT NOT NULL,
 	"category" TEXT NOT NULL,
-	"bottoms" TEXT NOT NULL,
-	"makeup" TEXT NOT NULL,
-	"attachment" TEXT NOT NULL,
+	"bottoms" TEXT,
+	"makeup" TEXT,
+	"attachment" TEXT,
 	"star" BOOLEAN NOT NULL,
 	CONSTRAINT "outfits_pk" PRIMARY KEY ("outfitId")
 ) WITH (
