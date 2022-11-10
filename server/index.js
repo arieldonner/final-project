@@ -59,7 +59,7 @@ app.get('/api/events/:eventId', (req, res, next) => {
             "endTime",
             "locationName"
       from "events"
-      join "locations"
+      join "locations" using ("locationId")
       where "eventId" = $1
       `;
   const params = [eventId];
