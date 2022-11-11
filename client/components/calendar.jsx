@@ -36,15 +36,7 @@ export default class CalendarPage extends React.Component {
               <div className='row justify-content-center'>
                 <Calendar onChange={this.onChange} value={this.state.value}
                 tileClassName={({ date }) => {
-                  let day = date.getDate();
-                  let month = date.getMonth() + 1;
-                  if (date.getMonth() < 10) {
-                    month = '0' + month;
-                  }
-                  if (date.getDate() < 10) {
-                    day = '0' + day;
-                  }
-                  const realDate = date.getFullYear() + '-' + month + '-' + day;
+                  const realDate = date.toISOString().slice(0, 10);
                   for (let i = 0; i < this.state.events.length; i++) {
                     const fixedDate = this.state.events[i].startDate.slice(0, 10);
                     if (realDate === fixedDate) {
