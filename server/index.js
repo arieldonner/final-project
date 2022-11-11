@@ -96,7 +96,7 @@ app.get('/api/events/:startDate', (req, res, next) => {
       if (!result.rows[0]) {
         res.json(null);
       } else {
-        res.json(result.rows[0]);
+        res.json(result.rows);
       }
     })
     .catch(err => next(err));
