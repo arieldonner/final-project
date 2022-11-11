@@ -48,7 +48,7 @@ export default class EventTile extends React.Component {
     return (
       <div className='row justify-content-center'>
         {this.state.event.map(event => (
-          <div key={event.eventId} className='tile col col-md-10 ps-4 mb-3'>
+          <div key={event.eventId} className='tile col-sm-12 col-md-10 ps-4 mb-3'>
             <div className='row align-items-center'>
               <div className='col-8 col-md-9'>
                 <h3 className='blue'>{event.eventName}</h3>

@@ -85,7 +85,8 @@ app.get('/api/events/:startDate', (req, res, next) => {
             "startTime",
             "endDate",
             "endTime",
-            "locationName"
+            "locationName",
+            "eventId"
       from "events"
       join "locations" using ("locationId")
       where "startDate" = $1
