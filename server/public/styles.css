@@ -1,0 +1,147 @@
+body {
+  font-family: Inter, sans-serif;
+  background-image: url("images/final-project-background.jpg");
+  background-size: auto;
+  background-position: center -1100px;
+  background-repeat: no-repeat;
+}
+
+.cookie {
+  font-family: Cookie, cursive;
+}
+
+.inter {
+  font-family: Inter, sans-serif;
+}
+
+.light-blue {
+  color: #90caf9;
+}
+
+.blue {
+  color: #1976d2;
+}
+
+.white {
+  color: white;
+}
+
+.red {
+  color: #f47575;
+}
+
+.brand {
+  font-size: 2.5rem;
+  margin-left: 1rem;
+}
+
+.nav-container {
+  background-color: #90caf9;
+  height: 3.8rem;
+}
+
+.nav-links {
+  text-decoration: none;
+  font-size: 1.25rem;
+  color: white;
+}
+
+.nav-links:hover {
+  color: #1976d2;
+}
+
+.logout {
+  position: relative;
+  right: -1rem;
+}
+
+.fa-bars {
+  transform: scale(1.8);
+}
+
+.icon {
+  transform: scale(2);
+  cursor: pointer;
+}
+
+.nav-container-tall {
+  background-color: #90caf9;
+  height: 185px;
+}
+
+.fa-xmark {
+  transform: scale(2);
+}
+
+.brand-mobile {
+  font-size: 2.5rem;
+  margin-bottom: -0.5rem;
+}
+
+.heading {
+  text-align: center;
+  color: #1976d2;
+  -webkit-text-stroke: 0.5px black;
+  font-size: 4rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.date {
+  text-align: center;
+  color: #1976d2;
+  -webkit-text-stroke: 0.5px black;
+}
+
+.fa-rectangle-list {
+  transform: scale(2);
+  color: #1976d2;
+  cursor: pointer;
+}
+
+.tile {
+  width: 80px;
+  height: 100%;
+  padding: 1rem;
+  background-color: white;
+  border: 2px solid #1976d2;
+}
+
+/* Calendar */
+
+.react-calendar {
+  border: 2px solid #1976d2;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  border-radius: 50%;
+}
+
+.react-calendar__tile {
+  padding: 13px 6.6667px;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  border-radius: 50%;
+}
+
+.react-calendar__tile--now {
+  height: 42px;
+  border-radius: 50%;
+}
+
+.highlight {
+  background-color: #76baff;
+  color: black;
+}
+
+.react-calendar__tile--active {
+  background: #006edc;
+  border-radius: 50%;
+  height: 42px;
+  color: white;
+}
