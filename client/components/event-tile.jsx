@@ -1,4 +1,5 @@
 import React from 'react';
+import { convertTime } from '../lib';
 
 export default class EventTile extends React.Component {
   constructor(props) {
@@ -7,9 +8,29 @@ export default class EventTile extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/events/${this.props.eventId}`)
+    const currentSelect = this.props.value.toISOString().split('T')[0] + 'T00:00:00Z';
+    fetch(`/api/events/${currentSelect}`)
       .then(res => res.json())
-      .then(event => this.setState({ event }));
+      .then(res => {
+        if (!Response.ok) {
+          this.setState({ event: null });
+        }
+        this.setState({ event: res });
+      });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.value !== prevProps.value) {
+      const currentSelect = this.props.value.toISOString().split('T')[0] + 'T00:00:00Z';
+      fetch(`/api/events/${currentSelect}`)
+        .then(res => res.json())
+        .then(res => {
+          if (!Response.ok) {
+            this.setState({ event: null });
+          }
+          this.setState({ event: res });
+        });
+    }
   }
 
   render() {
@@ -36,8 +57,8 @@ export default class EventTile extends React.Component {
               <p>Location: <span className='blue'>{locationName}</span></p>
             </div>
             <div className='col-4 col-md-3 text-end pe-4'>
-              <p className='mb-1'>{startTime}</p>
-              <p>{endTime}</p>
+              <p className='mb-1'>{convertTime(startTime)}</p>
+              <p>{convertTime(endTime)}</p>
             </div>
           </div>
         </div>

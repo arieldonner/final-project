@@ -4,8 +4,8 @@ const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./error-middleware');
 const path = require('path');
 const pg = require('pg');
-const argon2 = require('argon2');
-const jwt = require('jsonwebtoken');
+// const argon2 = require('argon2');
+// const jwt = require('jsonwebtoken');
 const ClientError = require('./client-error');
 
 const db = new pg.Pool({
@@ -38,7 +38,8 @@ app.get('/api/events', (req, res, next) => {
             "startTime",
             "endDate",
             "endTime",
-            "locationName"
+            "locationName",
+            "eventId"
       from "events"
       join "locations" using ("locationId")`;
   db.query(sql)
@@ -46,10 +47,37 @@ app.get('/api/events', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/events/:eventId', (req, res, next) => {
-  const eventId = Number(req.params.eventId);
-  if (!eventId) {
-    throw new ClientError(400, 'eventId must be a positive integer');
+// app.get('/api/events/:eventId', (req, res, next) => {
+//   const eventId = Number(req.params.eventId);
+//   if (!eventId) {
+//     throw new ClientError(400, 'eventId must be a positive integer');
+//   }
+//   const sql = `
+//   select "eventName",
+//             "startDate",
+//             "startTime",
+//             "endDate",
+//             "endTime",
+//             "locationName"
+//       from "events"
+//       join "locations" using ("locationId")
+//       where "eventId" = $1
+//       `;
+//   const params = [eventId];
+//   db.query(sql, params)
+//     .then(result => {
+//       if (!result.rows[0]) {
+//         throw new ClientError(404, `cannot find event with eventId ${eventId}`);
+//       }
+//       res.json(result.rows[0]);
+//     })
+//     .catch(err => next(err));
+// });
+
+app.get('/api/events/:startDate', (req, res, next) => {
+  const startDate = req.params.startDate;
+  if (!startDate) {
+    throw new ClientError(400, 'startDate must be a date');
   }
   const sql = `
   select "eventName",
@@ -60,15 +88,16 @@ app.get('/api/events/:eventId', (req, res, next) => {
             "locationName"
       from "events"
       join "locations" using ("locationId")
-      where "eventId" = $1
+      where "startDate" = $1
       `;
-  const params = [eventId];
+  const params = [startDate];
   db.query(sql, params)
     .then(result => {
       if (!result.rows[0]) {
-        throw new ClientError(404, `cannot find event with eventId ${eventId}`);
+        res.json(null);
+      } else {
+        res.json(result.rows[0]);
       }
-      res.json(result.rows[0]);
     })
     .catch(err => next(err));
 });

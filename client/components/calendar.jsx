@@ -1,7 +1,7 @@
 import React from 'react';
 import Calendar from 'react-calendar/dist/cjs/Calendar';
 import 'react-calendar/dist/Calendar.css';
-// import EventTile from './event-tile';
+import EventTile from './event-tile';
 
 export default class CalendarPage extends React.Component {
   constructor(props) {
@@ -18,9 +18,7 @@ export default class CalendarPage extends React.Component {
     fetch('/api/events')
       .then(res => res.json())
       .then(res => {
-        // console.log(res);
         this.setState({ events: res });
-        // console.log(res[0].startDate.slice(0, 10));
       });
   }
 
@@ -57,23 +55,9 @@ export default class CalendarPage extends React.Component {
                 />
               </div>
             </div>
-            {/* dummy data below */}
             <div className='col-sm-12 col-md-6 order-sm-2 order-md-1'>
               <h2 className='date mb-3'>{this.state.value.toDateString()}</h2>
-              <div className='row justify-content-center'>
-                <div className='tile col col-md-10 ps-4 mb-3'>
-                  <div className='row align-items-center'>
-                    <div className='col-8 col-md-9'>
-                      <h3 className='blue'>Competition</h3>
-                      <p>Location: <span className='blue'>Irvine</span></p>
-                    </div>
-                    <div className='col-4 col-md-3 text-end pe-4'>
-                      <p className='mb-1'>9:30 AM</p>
-                      <p>10:30 AM</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <EventTile value={this.state.value} events={this.state.events} />
             </div>
           </div>
         </div>
