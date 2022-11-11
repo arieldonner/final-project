@@ -47,33 +47,6 @@ app.get('/api/events', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// app.get('/api/events/:eventId', (req, res, next) => {
-//   const eventId = Number(req.params.eventId);
-//   if (!eventId) {
-//     throw new ClientError(400, 'eventId must be a positive integer');
-//   }
-//   const sql = `
-//   select "eventName",
-//             "startDate",
-//             "startTime",
-//             "endDate",
-//             "endTime",
-//             "locationName"
-//       from "events"
-//       join "locations" using ("locationId")
-//       where "eventId" = $1
-//       `;
-//   const params = [eventId];
-//   db.query(sql, params)
-//     .then(result => {
-//       if (!result.rows[0]) {
-//         throw new ClientError(404, `cannot find event with eventId ${eventId}`);
-//       }
-//       res.json(result.rows[0]);
-//     })
-//     .catch(err => next(err));
-// });
-
 app.get('/api/events/:startDate', (req, res, next) => {
   const startDate = req.params.startDate;
   if (!startDate) {
@@ -99,6 +72,33 @@ app.get('/api/events/:startDate', (req, res, next) => {
       } else {
         res.json(result.rows);
       }
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/event/:eventId', (req, res, next) => {
+  const eventId = Number(req.params.eventId);
+  if (!eventId) {
+    throw new ClientError(400, 'eventId must be a positive integer');
+  }
+  const sql = `
+  select "eventName",
+            "startDate",
+            "startTime",
+            "endDate",
+            "endTime",
+            "locationName"
+      from "events"
+      join "locations" using ("locationId")
+      where "eventId" = $1
+      `;
+  const params = [eventId];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find event with eventId ${eventId}`);
+      }
+      res.json(result.rows[0]);
     })
     .catch(err => next(err));
 });
