@@ -100,8 +100,6 @@ body {
 }
 
 .tile {
-  width: 80px;
-  height: 100%;
   padding: 1rem;
   background-color: white;
   border: 2px solid #1976d2;
@@ -110,7 +108,7 @@ body {
 /* Calendar */
 
 .react-calendar {
-  border: 2px solid #1976d2;
+  border: 2px solid #1976d2 !important;
   border-radius: 1rem;
   padding: 1rem;
   font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -122,6 +120,7 @@ body {
 
 .react-calendar__tile {
   padding: 13px 6.6667px;
+  height: 42px;
 }
 
 .react-calendar__tile:enabled:hover,
@@ -130,18 +129,17 @@ body {
 }
 
 .react-calendar__tile--now {
-  height: 42px;
   border-radius: 50%;
 }
 
 .highlight {
-  background-color: #76baff;
-  color: black;
+  background-color: #76baff !important;
+  border-radius: 50%;
+  color: black !important;
 }
 
 .react-calendar__tile--active {
-  background: #006edc;
+  background: #006edc !important;
   border-radius: 50%;
-  height: 42px;
-  color: white;
+  color: white !important;
 }
