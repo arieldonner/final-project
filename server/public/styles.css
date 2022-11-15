@@ -69,6 +69,11 @@ body {
   height: 185px;
 }
 
+.nav-container-tall-log {
+  background-color: #90caf9;
+  height: 155px;
+}
+
 .fa-xmark {
   transform: scale(2);
 }

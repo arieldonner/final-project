@@ -12,7 +12,7 @@ export default class AuthPage extends React.Component {
 
     return (
       <div>
-        <Navbar />
+        <Navbar action={route.path}/>
         <AuthForm
         key={route.path}
         action={route.path}
