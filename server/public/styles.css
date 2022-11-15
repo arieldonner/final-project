@@ -143,3 +143,9 @@ body {
   border-radius: 50%;
   color: black !important;
 }
+
+.form-style {
+  background-color: white;
+  border: 1.5px solid #006edc;
+  border-radius: 1rem;
+}

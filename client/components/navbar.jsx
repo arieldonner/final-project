@@ -23,13 +23,13 @@ export default class Navbar extends React.Component {
               <a href='#' className='nav-links p-0'>Events</a>
             </div>
             <div className='col-1 d-none d-md-block'>
-              <a href='#' className='nav-links p-0'>Outfits</a>
+              <a href='#outfits' className='nav-links p-0'>Outfits</a>
             </div>
             <div className='col-1 d-none d-md-block'>
-              <a href='#' className='nav-links p-0'>About</a>
+              <a href='#about' className='nav-links p-0'>About</a>
             </div>
             <div className='col-7 d-none d-md-block text-end logout'>
-              <a href='#' className='nav-links p-0'>
+              <a href='#sign-in' className='nav-links p-0'>
                 Log Out
                 <i className="fa-regular fa-circle-user ps-2" />
               </a>
