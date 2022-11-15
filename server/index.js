@@ -5,7 +5,7 @@ const errorMiddleware = require('./error-middleware');
 const path = require('path');
 const pg = require('pg');
 const argon2 = require('argon2');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const ClientError = require('./client-error');
 
 const db = new pg.Pool({
@@ -32,7 +32,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     .hash(password)
     .then(hashedPassword => {
       const sql = `
-        insert into "users" ("userName", "password")
+        insert into "users" ("userName", "hashedPassword")
         values ($1, $2)
         returning "userId", "userName"
       `;
@@ -42,6 +42,40 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     .then(result => {
       const [user] = result.rows;
       res.status(201).json(user);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/auth/sign-in', (req, res, next) => {
+  const { userName, password } = req.body;
+  if (!userName || !password) {
+    throw new ClientError(401, 'invalid login');
+  }
+
+  const sql = `
+      select "userId",
+              "hashedPassword"
+          from "users"
+        where "userName" = $1
+  `;
+  const params = [userName];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'invalid login');
+      }
+      const { userId, hashedPassword } = user;
+      return argon2
+        .verify(hashedPassword, password)
+        .then(isMatching => {
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = { userId, userName };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          res.json({ token, user: payload });
+        });
     })
     .catch(err => next(err));
 });

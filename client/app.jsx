@@ -6,13 +6,20 @@ import { parseRoute } from './lib';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { route: parseRoute(window.location.hash) };
+    this.state = {
+      user: null,
+      isAuthorizing: true,
+      route: parseRoute(window.location.hash)
+    };
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
+    // const token = window.localStorage.getItem('');
   }
 
   renderPage() {
