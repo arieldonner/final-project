@@ -149,3 +149,8 @@ body {
   border: 1.5px solid #006edc;
   border-radius: 1rem;
 }
+
+.btn-primary {
+  background-color: #1976d2;
+  border-radius: 4rem;
+}
