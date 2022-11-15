@@ -30,6 +30,9 @@ export default class Navbar extends React.Component {
               <div className='col-1 d-none d-md-block'>
                 <a href='#about' className='nav-links p-0'>About</a>
               </div>
+              <div className='col-9 .d-none .d-sm-block .d-md-none d-lg-none d-xl-none text-end logout'>
+                <i className="fa-solid fa-bars" onClick={this.handleClick} />
+              </div>
             </div>
           </nav>
         );

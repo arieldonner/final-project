@@ -2,7 +2,7 @@ import React from 'react';
 import Redirect from '../components/redirect';
 import AuthForm from '../components/auth-form';
 import Navbar from '../components/navbar';
-import { appContext } from '../lib';
+import { AppContext } from '../lib';
 
 export default class AuthPage extends React.Component {
   render() {
@@ -22,4 +22,4 @@ export default class AuthPage extends React.Component {
   }
 }
 
-AuthPage.contextType = appContext;
+AuthPage.contextType = AppContext;

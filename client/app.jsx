@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './pages/home';
 import AuthPage from './pages/auth';
-import { parseRoute, appContext } from './lib';
+import { parseRoute, AppContext } from './lib';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -49,12 +49,12 @@ export default class App extends React.Component {
     const { handleSignIn, handleSignOut } = this;
     const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
-      <appContext.Provider value={contextValue}>
+      <AppContext.Provider value={contextValue}>
         <AuthPage />
         {/* {this.renderPage}; */}
-      </appContext.Provider>
+      </AppContext.Provider>
     );
   }
 }
 
-App.contextType = appContext;
+App.contextType = AppContext;
