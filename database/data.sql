@@ -1,6 +1,6 @@
 insert into "users" (
   "userName",
-  "password"
+  "hashedPassword"
 ) values (
   'username',
   'password'
