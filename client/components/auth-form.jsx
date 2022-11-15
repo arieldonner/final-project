@@ -4,7 +4,7 @@ export default class AuthForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      userName: '',
       password: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -14,7 +14,6 @@ export default class AuthForm extends React.Component {
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    console.log(this.state);
   }
 
   handleSubmit(event) {
@@ -53,7 +52,6 @@ export default class AuthForm extends React.Component {
     const submitButtonText = action === 'sign-up'
       ? 'Create Account'
       : 'Login';
-    console.log(action);
     return (
       <div className='form-style container-fluid col-10 col-md-5 p-4 mt-5'>
         <h1 className='cookie blue text-center mb-3'>{welcomeMessage}</h1>
@@ -63,9 +61,9 @@ export default class AuthForm extends React.Component {
             <input
             required
             autoFocus
-            id='username'
+            id='userName'
             type="text"
-            name="username"
+            name="userName"
             onChange={handleChange}
             className="form-control" />
           </div>
