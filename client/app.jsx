@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './pages/home';
+import AuthPage from './pages/auth';
 import { parseRoute } from './lib';
 
 export default class App extends React.Component {
@@ -15,13 +16,13 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    const { route } = this.state;
-    if (route.path === '') {
+    const { path } = this.state.route;
+    if (path === '') {
       return <Home />;
     }
-    // if (route.path === 'events') {
-
-    // }
+    if (path === 'sign-in' || path === 'sign-up') {
+      return <AuthPage />;
+    }
     // if (route.path === 'outfits') {
 
     // }

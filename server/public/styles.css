@@ -132,14 +132,14 @@ body {
   border-radius: 50%;
 }
 
-.highlight {
-  background-color: #76baff !important;
-  border-radius: 50%;
-  color: black !important;
-}
-
 .react-calendar__tile--active {
   background: #006edc !important;
   border-radius: 50%;
   color: white !important;
+}
+
+.highlight {
+  background-color: #76baff !important;
+  border-radius: 50%;
+  color: black !important;
 }

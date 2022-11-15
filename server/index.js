@@ -23,9 +23,9 @@ app.use(express.json());
 
 app.use(staticMiddleware);
 
-app.post('api/auth/sign-up', (req, res, next) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
+app.post('/api/auth/sign-up', (req, res, next) => {
+  const { userName, password } = req.body;
+  if (!userName || !password) {
     throw new ClientError(400, 'username and password are required fields');
   }
   argon2
@@ -36,7 +36,7 @@ app.post('api/auth/sign-up', (req, res, next) => {
         values ($1, $2)
         returning "userId", "userName"
       `;
-      const params = [username, hashedPassword];
+      const params = [userName, hashedPassword];
       return db.query(sql, params);
     })
     .then(result => {
@@ -44,10 +44,6 @@ app.post('api/auth/sign-up', (req, res, next) => {
       res.status(201).json(user);
     })
     .catch(err => next(err));
-});
-
-app.get('/api/hello', (req, res) => {
-  res.json({ hello: 'world' });
 });
 
 app.get('/api/events', (req, res, next) => {
