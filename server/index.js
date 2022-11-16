@@ -7,6 +7,7 @@ const pg = require('pg');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const ClientError = require('./client-error');
+const authorizationMiddleware = require('./authorization-middleware');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -102,8 +103,11 @@ app.get('/api/events/user/:userId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.use(authorizationMiddleware);
+
 app.get('/api/events/:startDate', (req, res, next) => {
   const startDate = req.params.startDate;
+  const { userId } = req.user;
   if (!startDate) {
     throw new ClientError(400, 'startDate must be a date');
   }
@@ -118,8 +122,9 @@ app.get('/api/events/:startDate', (req, res, next) => {
       from "events"
       join "locations" using ("locationId")
       where "startDate" = $1
+        and "userId" = $2
       `;
-  const params = [startDate];
+  const params = [startDate, userId];
   db.query(sql, params)
     .then(result => {
       if (!result.rows[0]) {

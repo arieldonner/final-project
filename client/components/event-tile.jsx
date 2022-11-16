@@ -1,5 +1,5 @@
 import React from 'react';
-import { convertTime } from '../lib';
+import { convertTime, AppContext } from '../lib';
 
 export default class EventTile extends React.Component {
   constructor(props) {
@@ -9,7 +9,11 @@ export default class EventTile extends React.Component {
 
   componentDidMount() {
     const currentSelect = this.props.value.toISOString().split('T')[0] + 'T00:00:00Z';
-    fetch(`/api/events/${currentSelect}`)
+    fetch(`/api/events/${currentSelect}`, {
+      headers: {
+        'x-access-token': localStorage.getItem('jwt')
+      }
+    })
       .then(res => res.json())
       .then(res => {
         if (!Response.ok) {
@@ -22,7 +26,11 @@ export default class EventTile extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.value !== prevProps.value) {
       const currentSelect = this.props.value.toISOString().split('T')[0] + 'T00:00:00Z';
-      fetch(`/api/events/${currentSelect}`)
+      fetch(`/api/events/${currentSelect}`, {
+        headers: {
+          'x-access-token': localStorage.getItem('jwt')
+        }
+      })
         .then(res => res.json())
         .then(res => {
           if (!Response.ok) {
@@ -65,3 +73,5 @@ export default class EventTile extends React.Component {
     );
   }
 }
+
+EventTile.contextType = AppContext;
