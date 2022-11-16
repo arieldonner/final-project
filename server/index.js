@@ -89,7 +89,6 @@ app.get('/api/events', (req, res, next) => {
     select "eventName",
             "startDate",
             "startTime",
-            "endDate",
             "endTime",
             "locationName",
             "eventId"
@@ -112,7 +111,6 @@ app.get('/api/events/:startDate', (req, res, next) => {
   select "eventName",
             "startDate",
             "startTime",
-            "endDate",
             "endTime",
             "locationName",
             "eventId"
@@ -142,7 +140,6 @@ app.get('/api/event/:eventId', (req, res, next) => {
   select "eventName",
             "startDate",
             "startTime",
-            "endDate",
             "endTime",
             "locationName"
       from "events"

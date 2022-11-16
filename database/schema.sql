@@ -18,7 +18,6 @@ CREATE TABLE "public"."events" (
 	"eventName" TEXT NOT NULL,
 	"startDate" DATE NOT NULL,
 	"startTime" TIME NOT NULL,
-	"endDate" DATE NOT NULL,
 	"endTime" TIME NOT NULL,
 	"locationId" integer NOT NULL,
 	"outfitId" integer,

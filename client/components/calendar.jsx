@@ -36,7 +36,7 @@ export default class CalendarPage extends React.Component {
             <div className='col-sm-12 col-md-6 order-sm-1 order-md-2'>
               <div className='row align-items-center justify-content-center mb-3 ms-md-5 ps-3 ps-md-0'>
                 <i className="fa-regular fa-rectangle-list col-3" />
-                <button type='button' className='btn btn-primary col-3 col-md-2 offset-4 offset-md-1'>New+</button>
+                <a href='#create-event' className='btn btn-primary col-3 col-md-2 offset-4 offset-md-1'>New+</a>
               </div>
               <div className='row justify-content-center'>
                 <Calendar onChange={this.onChange} value={this.state.value}
