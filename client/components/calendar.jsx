@@ -16,8 +16,11 @@ export default class CalendarPage extends React.Component {
   }
 
   componentDidMount() {
-    const { user } = this.context;
-    fetch(`/api/events/user/${user.userId}`)
+    fetch('/api/events', {
+      headers: {
+        'x-access-token': localStorage.getItem('jwt')
+      }
+    })
       .then(res => res.json())
       .then(res => {
         this.setState({ events: res });

@@ -81,11 +81,10 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/events/user/:userId', (req, res, next) => {
-  const userId = Number(req.params.userId);
-  if (!userId) {
-    throw new ClientError(400, 'userId must be a positive integer');
-  }
+app.use(authorizationMiddleware);
+
+app.get('/api/events', (req, res, next) => {
+  const { userId } = req.user;
   const sql = `
     select "eventName",
             "startDate",
@@ -102,8 +101,6 @@ app.get('/api/events/user/:userId', (req, res, next) => {
     .then(result => res.json(result.rows))
     .catch(err => next(err));
 });
-
-app.use(authorizationMiddleware);
 
 app.get('/api/events/:startDate', (req, res, next) => {
   const startDate = req.params.startDate;
