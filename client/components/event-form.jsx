@@ -8,8 +8,7 @@ export default class EventForm extends React.Component {
       startDate: '',
       startTime: '',
       endTime: '',
-      locationName: null,
-      outfit: null
+      locationName: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +21,19 @@ export default class EventForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('jwt')
+      },
+      body: JSON.stringify(this.state)
+    };
+    fetch('/api/create/event', req)
+      .then(res => res.json())
+      .then(result => {
+        window.location.hash = '#';
+      });
   }
 
   render() {
@@ -84,16 +96,6 @@ export default class EventForm extends React.Component {
             name="locationName"
             onChange={handleChange}
             className="form-control" />
-        </div>
-        <div className='mb-4'>
-          <label htmlFor='outfit' className='form-label'>Outfit:</label>
-          <select
-            id='outfit'
-            name="outfit"
-            onChange={handleChange}
-            className="form-select">
-            <option value='select'>Select</option>
-          </select>
         </div>
       </form>
     );

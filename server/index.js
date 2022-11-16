@@ -93,7 +93,6 @@ app.get('/api/events', (req, res, next) => {
             "locationName",
             "eventId"
       from "events"
-      join "locations" using ("locationId")
       where "userId" = $1`;
   const params = [userId];
   db.query(sql, params)
@@ -115,7 +114,6 @@ app.get('/api/events/:startDate', (req, res, next) => {
             "locationName",
             "eventId"
       from "events"
-      join "locations" using ("locationId")
       where "startDate" = $1
         and "userId" = $2
       `;
@@ -143,7 +141,6 @@ app.get('/api/event/:eventId', (req, res, next) => {
             "endTime",
             "locationName"
       from "events"
-      join "locations" using ("locationId")
       where "eventId" = $1
       `;
   const params = [eventId];
@@ -153,6 +150,26 @@ app.get('/api/event/:eventId', (req, res, next) => {
         throw new ClientError(404, `cannot find event with eventId ${eventId}`);
       }
       res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/create/event', (req, res, next) => {
+  const { userId } = req.user;
+  const { eventName, startDate, startTime, endTime, locationName } = req.body;
+  if (!eventName || !startDate || !startTime || !endTime) {
+    throw new ClientError(400, 'Event Name, Start Date, Start Time, and End Time are required fields.');
+  }
+  const sql = `
+  insert into "events" ("userId", "eventName", "startDate", "startTime", "endTime", "locationName")
+  values ($1, $2, $3, $4, $5, $6)
+  returning *
+  `;
+  const params = [userId, eventName, startDate, startTime, endTime, locationName];
+  db.query(sql, params)
+    .then(result => {
+      const [event] = result.rows;
+      res.status(201).json(event);
     })
     .catch(err => next(err));
 });
