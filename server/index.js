@@ -80,7 +80,11 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/events', (req, res, next) => {
+app.get('/api/events/user/:userId', (req, res, next) => {
+  const userId = Number(req.params.userId);
+  if (!userId) {
+    throw new ClientError(400, 'userId must be a positive integer');
+  }
   const sql = `
     select "eventName",
             "startDate",
@@ -90,8 +94,10 @@ app.get('/api/events', (req, res, next) => {
             "locationName",
             "eventId"
       from "events"
-      join "locations" using ("locationId")`;
-  db.query(sql)
+      join "locations" using ("locationId")
+      where "userId" = $1`;
+  const params = [userId];
+  db.query(sql, params)
     .then(result => res.json(result.rows))
     .catch(err => next(err));
 });
