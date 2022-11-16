@@ -27,10 +27,10 @@ export default class EventForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     return (
-      <form className='container-fluid col-12 col-md-6 p-3 form-style' onSubmit={handleSubmit}>
-        <div className='d-flex justify-content-between'>
-          <p className='red'>Cancel</p>
-          <p className='blue'>Submit</p>
+      <form className='container-fluid col-12 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
+        <div className='d-flex justify-content-between align-items-center mb-3'>
+          <a href='#' className='red fs-5 text-decoration-none'>Cancel</a>
+          <button type='submit' className='blue btn btn-link text-decoration-none'><span className='fs-5'>Submit</span></button>
         </div>
         <div className='mb-4'>
           <label htmlFor='eventName' className='form-label'>Event Name:</label>
@@ -55,7 +55,7 @@ export default class EventForm extends React.Component {
             className="form-control" />
         </div>
         <div className='d-flex justify-content-between col-12'>
-          <div className='mb-4 col-6'>
+          <div className='mb-4 col-5'>
             <label htmlFor='startTime' className='form-label'>Start Time:</label>
             <input
               required
@@ -65,7 +65,7 @@ export default class EventForm extends React.Component {
               onChange={handleChange}
               className="form-control" />
           </div>
-          <div className='mb-4 col-6'>
+          <div className='mb-4 col-5'>
             <label htmlFor='endTime' className='form-label'>End Time:</label>
             <input
               required
@@ -84,6 +84,16 @@ export default class EventForm extends React.Component {
             name="locationName"
             onChange={handleChange}
             className="form-control" />
+        </div>
+        <div className='mb-4'>
+          <label htmlFor='outfit' className='form-label'>Outfit:</label>
+          <select
+            id='outfit'
+            name="outfit"
+            onChange={handleChange}
+            className="form-select">
+            <option value='select'>Select</option>
+          </select>
         </div>
       </form>
     );

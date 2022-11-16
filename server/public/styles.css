@@ -159,3 +159,7 @@ body {
   background-color: #1976d2;
   border-radius: 4rem;
 }
+
+.fake-button {
+  border: none;
+}
