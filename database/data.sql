@@ -3,7 +3,13 @@ insert into "users" (
   "hashedPassword"
 ) values (
   'username',
-  'password'
+  '$argon2i$v=19$m=4096,t=3,p=1$h7icQD/xZr8akZsX+hNA0A$h68atJWyjvunAwNOpSpMfg9sPvoMQ6dKwoh0dJhurWA'
+), (
+  'user2',
+  '$argon2i$v=19$m=4096,t=3,p=1$h7icQD/xZr8akZsX+hNA0A$h68atJWyjvunAwNOpSpMfg9sPvoMQ6dKwoh0dJhurWA'
+), (
+  'user3',
+  '$argon2i$v=19$m=4096,t=3,p=1$h7icQD/xZr8akZsX+hNA0A$h68atJWyjvunAwNOpSpMfg9sPvoMQ6dKwoh0dJhurWA'
 );
 
 insert into "outfits" (
@@ -73,4 +79,13 @@ insert into "events" (
   1,
   1,
   1
+), (
+  'Competition',
+  '11-28-2022',
+  '12:00PM',
+  '11-28-2022',
+  '2:00PM',
+  1,
+  1,
+  2
 );

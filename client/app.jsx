@@ -1,4 +1,5 @@
 import React from 'react';
+import jwtDecode from 'jwt-decode';
 import Home from './pages/home';
 import AuthPage from './pages/auth';
 import { parseRoute, AppContext } from './lib';
@@ -8,19 +9,31 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: null,
-      isAuthorizing: false,
+      isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
-    // need to change isAuthorizing back to true;
-    // this.handleSignIn = this.handleSignIn.bind(this);
-    // this.handleSignOut = this.handleSignOut.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
-    // const token = window.localStorage.getItem('');
+    const token = window.localStorage.getItem('jwt');
+    const user = token ? jwtDecode(token) : null;
+    this.setState({ user, isAuthorizing: false });
+  }
+
+  handleSignIn(result) {
+    const { user, token } = result;
+    window.localStorage.setItem('jwt', token);
+    this.setState({ user });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('jwt');
+    this.setState({ user: null });
   }
 
   renderPage() {
@@ -50,8 +63,7 @@ export default class App extends React.Component {
     const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
       <AppContext.Provider value={contextValue}>
-        <AuthPage />
-        {/* {this.renderPage}; */}
+        {this.renderPage()};
       </AppContext.Provider>
     );
   }

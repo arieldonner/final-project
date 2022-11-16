@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppContext } from '../lib';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class Navbar extends React.Component {
   }
 
   render() {
+    const { handleSignOut } = this.context;
     const { action } = this.props;
     if (this.state.isOpen === false) {
       if (action === 'sign-in' || action === 'sign-up') {
@@ -51,7 +53,7 @@ export default class Navbar extends React.Component {
                 <a href='#about' className='nav-links p-0'>About</a>
               </div>
               <div className='col-7 d-none d-md-block text-end logout'>
-                <a href='#sign-in' className='nav-links p-0'>
+                <a href='#sign-in' className='nav-links p-0' onClick={handleSignOut}>
                   Log Out
                   <i className="fa-regular fa-circle-user ps-2" />
                 </a>
@@ -107,7 +109,7 @@ export default class Navbar extends React.Component {
                 <a href='#' className='nav-links p-0'>About</a>
               </div>
               <div className='col ps-3'>
-                <a href='#' className='nav-links p-0'>
+                <a href='#' className='nav-links p-0' onClick={handleSignOut}>
                   Log Out
                   <i className="fa-regular fa-circle-user ps-2" />
                 </a>
@@ -119,3 +121,5 @@ export default class Navbar extends React.Component {
     }
   }
 }
+
+Navbar.contextType = AppContext;
