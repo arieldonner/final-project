@@ -9,16 +9,6 @@ export default class EditEventPage extends React.Component {
     this.state = { eventId: this.props.eventId };
   }
 
-  componentDidMount() {
-    // fetch(`/api/event/${this.props.eventId}`, {
-    //   headers: {
-    //     'x-access-token': localStorage.getItem('jwt')
-    //   }
-    // })
-    //   .then(res => res.json())
-    //   .then(event => this.setState({ event }));
-  }
-
   render() {
     return (
       <div>

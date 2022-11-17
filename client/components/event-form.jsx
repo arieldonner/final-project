@@ -27,7 +27,7 @@ export default class EventForm extends React.Component {
         .then(res => res.json())
         .then(event => this.setState({
           eventName: event.eventName,
-          startDate: event.startDate,
+          startDate: event.startDate.slice(0, 10),
           startTime: event.startTime,
           endTime: event.endTime,
           locationName: event.locationName
@@ -58,7 +58,6 @@ export default class EventForm extends React.Component {
   }
 
   render() {
-    // console.log('state', this.state);
     const { handleChange, handleSubmit } = this;
     return (
       <form className='container-fluid col-12 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
