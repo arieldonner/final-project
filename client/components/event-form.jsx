@@ -69,7 +69,7 @@ export default class EventForm extends React.Component {
       fetch(`/api/edit/event/${this.props.eventId}`, req)
         .then(res => res.json())
         .then(res => {
-          // console.log(res);
+          window.location.hash = '#';
         });
     }
   }
