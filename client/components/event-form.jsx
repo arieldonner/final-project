@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppContext } from '../lib';
 
 export default class EventForm extends React.Component {
   constructor(props) {
@@ -8,10 +9,30 @@ export default class EventForm extends React.Component {
       startDate: '',
       startTime: '',
       endTime: '',
-      locationName: ''
+      locationName: '',
+      event: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { route } = this.context;
+    if (route.path === 'edit-event') {
+      fetch(`/api/event/${this.props.eventId}`, {
+        headers: {
+          'x-access-token': localStorage.getItem('jwt')
+        }
+      })
+        .then(res => res.json())
+        .then(event => this.setState({
+          eventName: event.eventName,
+          startDate: event.startDate.slice(0, 10),
+          startTime: event.startTime,
+          endTime: event.endTime,
+          locationName: event.locationName
+        }));
+    }
   }
 
   handleChange(event) {
@@ -21,19 +42,36 @@ export default class EventForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('jwt')
-      },
-      body: JSON.stringify(this.state)
-    };
-    fetch('/api/create/event', req)
-      .then(res => res.json())
-      .then(result => {
-        window.location.hash = '#';
-      });
+    const { route } = this.context;
+    if (route.path === 'create-event') {
+      const req = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('jwt')
+        },
+        body: JSON.stringify(this.state)
+      };
+      fetch('/api/create/event', req)
+        .then(res => res.json())
+        .then(result => {
+          window.location.hash = '#';
+        });
+    } else if (route.path === 'edit-event') {
+      const req = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('jwt')
+        },
+        body: JSON.stringify(this.state)
+      };
+      fetch(`/api/edit/event/${this.props.eventId}`, req)
+        .then(res => res.json())
+        .then(res => {
+          window.location.hash = '#';
+        });
+    }
   }
 
   render() {
@@ -106,3 +144,5 @@ export default class EventForm extends React.Component {
     );
   }
 }
+
+EventForm.contextType = AppContext;
