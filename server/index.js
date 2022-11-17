@@ -174,6 +174,34 @@ app.post('/api/create/event', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/edit/event/:eventId', (req, res, next) => {
+  const eventId = Number(req.params.eventId);
+  const editEvent = req.body;
+  if (!eventId) {
+    throw new ClientError(400, 'eventId must be a positive integer');
+  }
+  const sql = `
+    update "events"
+      set "eventName" = $1,
+          "startDate" = $2,
+          "startTime" = $3,
+          "endTime" = $4,
+          "locationName" = $5
+      where "eventId" = $6
+      returning *
+      `;
+  const params = [editEvent.eventName, editEvent.startDate, editEvent.startTime, editEvent.endTime, editEvent.locationName, eventId];
+  db.query(sql, params)
+    .then(result => {
+      const event = result.rows[0];
+      if (!event) {
+        throw new ClientError(404, `Cannot find event with eventId ${eventId}`);
+      }
+      res.status(201).json(event);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

@@ -42,19 +42,36 @@ export default class EventForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': localStorage.getItem('jwt')
-      },
-      body: JSON.stringify(this.state)
-    };
-    fetch('/api/create/event', req)
-      .then(res => res.json())
-      .then(result => {
-        window.location.hash = '#';
-      });
+    const { route } = this.context;
+    if (route.path === 'create-event') {
+      const req = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('jwt')
+        },
+        body: JSON.stringify(this.state)
+      };
+      fetch('/api/create/event', req)
+        .then(res => res.json())
+        .then(result => {
+          window.location.hash = '#';
+        });
+    } else if (route.path === 'edit-event') {
+      const req = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('jwt')
+        },
+        body: JSON.stringify(this.state)
+      };
+      fetch(`/api/edit/event/${this.props.eventId}`, req)
+        .then(res => res.json())
+        .then(res => {
+          // console.log(res);
+        });
+    }
   }
 
   render() {
