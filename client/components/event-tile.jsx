@@ -5,6 +5,7 @@ export default class EventTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = { event: null };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +42,13 @@ export default class EventTile extends React.Component {
     }
   }
 
+  handleClick(event) {
+    // console.log(this.state.event[0].eventId);
+    window.location.hash = 'edit-event';
+  }
+
   render() {
+    const { handleClick } = this;
     if (!this.state.event) {
       return (
         <div className='row justify-content-center'>
@@ -54,7 +61,7 @@ export default class EventTile extends React.Component {
       );
     }
     return (
-      <div className='row justify-content-center'>
+      <div className='row justify-content-center' onClick={handleClick}>
         {this.state.event.map(event => (
           <div key={event.eventId} className='tile col-sm-12 col-md-10 ps-4 mb-3'>
             <div className='row align-items-center'>
