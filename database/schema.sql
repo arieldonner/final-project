@@ -18,10 +18,8 @@ CREATE TABLE "public"."events" (
 	"eventName" TEXT NOT NULL,
 	"startDate" DATE NOT NULL,
 	"startTime" TIME NOT NULL,
-	"endDate" DATE NOT NULL,
 	"endTime" TIME NOT NULL,
-	"locationId" integer NOT NULL,
-	"outfitId" integer,
+	"locationName" TEXT NOT NULL,
 	"userId" integer NOT NULL,
 	CONSTRAINT "events_pk" PRIMARY KEY ("eventId")
 ) WITH (
@@ -43,17 +41,5 @@ CREATE TABLE "public"."outfits" (
   OIDS=FALSE
 );
 
-CREATE TABLE "public"."locations" (
-	"locationId" serial NOT NULL,
-	"lat" float8 NOT NULL,
-	"lng" float8 NOT NULL,
-	"locationName" TEXT NOT NULL,
-	CONSTRAINT "locations_pk" PRIMARY KEY ("locationId")
-) WITH (
-  OIDS=FALSE
-);
-
-ALTER TABLE "events" ADD CONSTRAINT "events_fk0" FOREIGN KEY ("locationId") REFERENCES "locations"("locationId");
-ALTER TABLE "events" ADD CONSTRAINT "events_fk1" FOREIGN KEY ("outfitId") REFERENCES "outfits"("outfitId");
 ALTER TABLE "events" ADD CONSTRAINT "events_fk2" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 ALTER TABLE "outfits" ADD CONSTRAINT "outfits_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");

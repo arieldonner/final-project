@@ -2,6 +2,7 @@ import React from 'react';
 import jwtDecode from 'jwt-decode';
 import Home from './pages/home';
 import AuthPage from './pages/auth';
+import CreateEventPage from './pages/create-event';
 import { parseRoute, AppContext } from './lib';
 
 export default class App extends React.Component {
@@ -43,6 +44,9 @@ export default class App extends React.Component {
     }
     if (path === 'sign-in' || path === 'sign-up') {
       return <AuthPage />;
+    }
+    if (path === 'create-event') {
+      return <CreateEventPage />;
     }
     // if (route.path === 'outfits') {
 

@@ -137,16 +137,16 @@ body {
   border-radius: 50%;
 }
 
-.react-calendar__tile--active {
-  background: #006edc !important;
-  border-radius: 50%;
-  color: white !important;
-}
-
 .highlight {
   background-color: #76baff !important;
   border-radius: 50%;
   color: black !important;
+}
+
+.react-calendar__tile--active {
+  background: #006edc !important;
+  border-radius: 50%;
+  color: white !important;
 }
 
 .form-style {
@@ -158,4 +158,8 @@ body {
 .btn-primary {
   background-color: #1976d2;
   border-radius: 4rem;
+}
+
+.fake-button {
+  border: none;
 }

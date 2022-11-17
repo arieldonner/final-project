@@ -32,60 +32,39 @@ insert into "outfits" (
   false
 );
 
-insert into "locations" (
-  "locationName",
-  "lat",
-  "lng"
-) values (
-  'Irvine',
-  33.68074,
-  -117.745162
-);
-
-
 insert into "events" (
   "eventName",
   "startDate",
   "startTime",
-  "endDate",
   "endTime",
-  "locationId",
-  "outfitId",
+  "locationName",
   "userId"
 ) values (
   'Competition',
   '11-11-2022',
   '9:30AM',
-  '11-11-2022',
   '10:30PM',
-  1,
-  1,
+  'Irvine',
   1
 ), (
   'Practice',
   '11-13-2022',
   '6:30PM',
-  '11-13-2022',
   '8:30PM',
-  1,
-  1,
+  'Simi Valley',
   1
 ), (
   'Competition',
   '11-13-2022',
   '12:30PM',
-  '11-13-2022',
   '1:30PM',
-  1,
-  1,
+  'Simi Valley',
   1
 ), (
   'Competition',
   '11-28-2022',
   '12:00PM',
-  '11-28-2022',
   '2:00PM',
-  1,
-  1,
+  'Chicago',
   2
 );
