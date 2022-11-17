@@ -5,7 +5,7 @@ export default class EventTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = { event: null };
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -42,13 +42,14 @@ export default class EventTile extends React.Component {
     }
   }
 
-  handleClick(event) {
-    // console.log(this.state.event[0].eventId);
-    window.location.hash = 'edit-event';
-  }
+  // handleClick(event) {
+  //   console.log(event.target.key);
+  //   console.log(this.state.event[0].eventId);
+  //   window.location.hash = 'edit-event';
+  // }
 
   render() {
-    const { handleClick } = this;
+    // const { handleClick } = this;
     if (!this.state.event) {
       return (
         <div className='row justify-content-center'>
@@ -61,20 +62,20 @@ export default class EventTile extends React.Component {
       );
     }
     return (
-      <div className='row justify-content-center' onClick={handleClick}>
+      <div className='row justify-content-center'>
         {this.state.event.map(event => (
-          <div key={event.eventId} className='tile col-sm-12 col-md-10 ps-4 mb-3'>
+          <a key={event.eventId} href={`#edit-event?eventId=${event.eventId}`} className='tile col-sm-12 col-md-10 ps-4 mb-3 text-decoration-none'>
             <div className='row align-items-center'>
               <div className='col-8 col-md-9'>
                 <h3 className='blue'>{event.eventName}</h3>
-                <p>Location: <span className='blue'>{event.locationName}</span></p>
+                <p className='black'>Location: <span className='blue'>{event.locationName}</span></p>
               </div>
               <div className='col-4 col-md-3 text-end pe-4'>
-                <p className='mb-1'>{convertTime(event.startTime)}</p>
-                <p>{convertTime(event.endTime)}</p>
+                <p className='mb-1 black'>{convertTime(event.startTime)}</p>
+                <p className='black'>{convertTime(event.endTime)}</p>
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     );

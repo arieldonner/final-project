@@ -50,7 +50,10 @@ export default class App extends React.Component {
       return <CreateEventPage />;
     }
     if (path === 'edit-event') {
-      return <EditEventPage />;
+      const queryString = window.location.hash.slice(11);
+      const params = new URLSearchParams(queryString);
+      const eventId = params.get('eventId');
+      return <EditEventPage eventId={eventId} />;
     }
     // if (route.path === 'outfits') {
 
