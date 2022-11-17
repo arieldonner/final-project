@@ -76,6 +76,7 @@ export default class EventForm extends React.Component {
 
   render() {
     const { handleChange, handleSubmit } = this;
+    const { route } = this.context;
     return (
       <form className='container-fluid col-12 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
         <div className='d-flex justify-content-between align-items-center mb-3'>
@@ -139,6 +140,9 @@ export default class EventForm extends React.Component {
             value={this.state.locationName}
             onChange={handleChange}
             className="form-control" />
+        </div>
+        <div className='d-flex justify-content-center'>
+          { route.path === 'edit-event' && <button className='btn btn-outline-danger'>Delete Event</button> }
         </div>
       </form>
     );
