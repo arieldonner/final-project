@@ -6,28 +6,26 @@ import { AppContext } from '../lib';
 export default class EditEventPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { event: null };
+    this.state = { eventId: this.props.eventId };
   }
 
   componentDidMount() {
-    fetch(`/api/event/${this.props.eventId}`, {
-      headers: {
-        'x-access-token': localStorage.getItem('jwt')
-      }
-    })
-      .then(res => res.json())
-      .then(event => this.setState({ event }));
+    // fetch(`/api/event/${this.props.eventId}`, {
+    //   headers: {
+    //     'x-access-token': localStorage.getItem('jwt')
+    //   }
+    // })
+    //   .then(res => res.json())
+    //   .then(event => this.setState({ event }));
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.props.eventId);
     return (
       <div>
         <Navbar />
         <div className="container-fluid">
           <h1 className="heading cookie">Edit Event</h1>
-          <EventForm />
+          <EventForm eventId={this.state.eventId}/>
         </div>
       </div>
     );

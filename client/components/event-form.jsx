@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppContext } from '../lib';
 
 export default class EventForm extends React.Component {
   constructor(props) {
@@ -8,10 +9,30 @@ export default class EventForm extends React.Component {
       startDate: '',
       startTime: '',
       endTime: '',
-      locationName: ''
+      locationName: '',
+      event: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { route } = this.context;
+    if (route.path === 'edit-event') {
+      fetch(`/api/event/${this.props.eventId}`, {
+        headers: {
+          'x-access-token': localStorage.getItem('jwt')
+        }
+      })
+        .then(res => res.json())
+        .then(event => this.setState({
+          eventName: event.eventName,
+          startDate: event.startDate,
+          startTime: event.startTime,
+          endTime: event.endTime,
+          locationName: event.locationName
+        }));
+    }
   }
 
   handleChange(event) {
@@ -37,6 +58,7 @@ export default class EventForm extends React.Component {
   }
 
   render() {
+    // console.log('state', this.state);
     const { handleChange, handleSubmit } = this;
     return (
       <form className='container-fluid col-12 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
@@ -106,3 +128,5 @@ export default class EventForm extends React.Component {
     );
   }
 }
+
+EventForm.contextType = AppContext;
