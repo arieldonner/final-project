@@ -52,6 +52,7 @@ export default class EventForm extends React.Component {
             id='eventName'
             type="text"
             name="eventName"
+            value={this.state.eventName}
             onChange={handleChange}
             className="form-control" />
         </div>
@@ -63,6 +64,7 @@ export default class EventForm extends React.Component {
             type="date"
             name="startDate"
             min="1960-01-01"
+            value={this.state.startDate}
             onChange={handleChange}
             className="form-control" />
         </div>
@@ -74,6 +76,7 @@ export default class EventForm extends React.Component {
               id='startTime'
               type="time"
               name="startTime"
+              value={this.state.startTime}
               onChange={handleChange}
               className="form-control" />
           </div>
@@ -84,6 +87,7 @@ export default class EventForm extends React.Component {
               id='endTime'
               type="time"
               name="endTime"
+              value={this.state.endTime}
               onChange={handleChange}
               className="form-control" />
           </div>
@@ -94,6 +98,7 @@ export default class EventForm extends React.Component {
             id='locationName'
             type="text"
             name="locationName"
+            value={this.state.locationName}
             onChange={handleChange}
             className="form-control" />
         </div>
