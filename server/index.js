@@ -202,6 +202,30 @@ app.put('/api/edit/event/:eventId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/delete/event/:eventId', (req, res, next) => {
+  const eventId = Number(req.params.eventId);
+  if (!eventId) {
+    throw new ClientError(400, 'eventId must be a positive integer');
+  }
+  const sql = `
+    delete
+        from "events"
+      where "eventId" = $1
+      returning *
+      `;
+  const params = [eventId];
+  db.query(sql, params)
+    .then(result => {
+      const event = result.rows[0];
+      if (!event) {
+        throw new ClientError(404, `Cannot find event with eventId ${eventId}`);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

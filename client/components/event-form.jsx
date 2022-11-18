@@ -10,10 +10,12 @@ export default class EventForm extends React.Component {
       startTime: '',
       endTime: '',
       locationName: '',
-      event: null
+      show: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleModal = this.handleModal.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -74,10 +76,47 @@ export default class EventForm extends React.Component {
     }
   }
 
+  handleModal(event) {
+    event.preventDefault();
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
+  handleDelete(event) {
+    event.preventDefault();
+    fetch(`/api/delete/event/${this.props.eventId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('jwt')
+      }
+    })
+      .then(res => {
+        window.location.hash = '#';
+      });
+  }
+
   render() {
+
     const { handleChange, handleSubmit } = this;
+    const { route } = this.context;
     return (
       <form className='container-fluid col-12 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
+        {this.state.isOpen === true &&
+          <div className='my-modal'>
+            <div className='my-modal-content'>
+              <div className='my-modal-header'>
+                <h4 className='my-modal-title'>Delete Event</h4>
+              </div>
+              <div className='my-modal-body'>
+                Are you sure you want to delete this event? This process cannot be undone.
+              </div>
+              <div className='my-modal-footer d-flex justify-content-end gap-3'>
+                <button className='btn btn-outline-secondary' onClick={this.handleModal}>Cancel</button>
+                <button className='btn btn-danger' onClick={this.handleDelete}>Delete</button>
+              </div>
+            </div>
+          </div>
+        }
         <div className='d-flex justify-content-between align-items-center mb-3'>
           <a href='#' className='red fs-5 text-decoration-none'>Cancel</a>
           <button type='submit' className='blue btn btn-link text-decoration-none'><span className='fs-5'>Submit</span></button>
@@ -139,6 +178,9 @@ export default class EventForm extends React.Component {
             value={this.state.locationName}
             onChange={handleChange}
             className="form-control" />
+        </div>
+        <div className='d-flex justify-content-center'>
+          { route.path === 'edit-event' && <button onClick={this.handleModal} className='btn btn-outline-danger'>Delete Event</button> }
         </div>
       </form>
     );
