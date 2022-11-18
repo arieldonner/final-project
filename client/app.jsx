@@ -4,6 +4,7 @@ import Home from './pages/home';
 import AuthPage from './pages/auth';
 import CreateEventPage from './pages/create-event';
 import EditEventPage from './pages/edit-event';
+import Outfits from './pages/outfits';
 import { parseRoute, AppContext } from './lib';
 
 export default class App extends React.Component {
@@ -55,9 +56,9 @@ export default class App extends React.Component {
       const eventId = params.get('eventId');
       return <EditEventPage eventId={eventId} />;
     }
-    // if (route.path === 'outfits') {
-
-    // }
+    if (path === 'outfits') {
+      return <Outfits />;
+    }
     // if (route.path === 'about') {
 
     // }
