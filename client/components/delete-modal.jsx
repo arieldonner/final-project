@@ -1,6 +1,26 @@
 import React from 'react';
 
 export default class Modal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isOpen: '' };
+    this.handleDelete = this.handleDelete.bind(this);
+    // this.closeModal = this.closeModal.bind(this);
+  }
+
+  handleDelete() {
+    fetch(`/api/delete/event/${this.props.eventId}`, {
+      method: 'DELETE',
+      headers: {
+        'x-access-token': localStorage.getItem('jwt')
+      }
+    })
+      .then(res => res.json())
+      .then(res => {
+        window.location.hash = '#';
+      });
+  }
+
   render() {
     return (
       <div className='my-modal'>
