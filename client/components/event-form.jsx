@@ -10,10 +10,11 @@ export default class EventForm extends React.Component {
       startTime: '',
       endTime: '',
       locationName: '',
-      event: null
+      isOpen: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.openModal = this.openModal.bind(this);
   }
 
   componentDidMount() {
@@ -74,11 +75,20 @@ export default class EventForm extends React.Component {
     }
   }
 
+  openModal(event) {
+    event.preventDefault();
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
   render() {
+    // console.log('condition', this.state.isOpen);
     const { handleChange, handleSubmit } = this;
     const { route } = this.context;
     return (
       <form className='container-fluid col-12 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
+        {this.state.isOpen === true &&
+          <div>Placeholder</div>
+        }
         <div className='d-flex justify-content-between align-items-center mb-3'>
           <a href='#' className='red fs-5 text-decoration-none'>Cancel</a>
           <button type='submit' className='blue btn btn-link text-decoration-none'><span className='fs-5'>Submit</span></button>
@@ -142,7 +152,7 @@ export default class EventForm extends React.Component {
             className="form-control" />
         </div>
         <div className='d-flex justify-content-center'>
-          { route.path === 'edit-event' && <button className='btn btn-outline-danger'>Delete Event</button> }
+          { route.path === 'edit-event' && <button onClick={this.openModal} className='btn btn-outline-danger'>Delete Event</button> }
         </div>
       </form>
     );
