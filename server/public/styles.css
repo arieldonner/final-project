@@ -167,3 +167,37 @@ body {
 .fake-button {
   border: none;
 }
+
+.my-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(0 0 0 / 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-modal-content {
+  width: 370px;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+.my-modal-header,
+.my-modal-footer {
+  padding: 1rem;
+}
+
+.my-modal-title {
+  margin: 0;
+}
+
+.my-modal-body {
+  padding: 1rem;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}

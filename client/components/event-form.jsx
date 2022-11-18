@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppContext } from '../lib';
+import Modal from './delete-modal';
 
 export default class EventForm extends React.Component {
   constructor(props) {
@@ -87,7 +88,7 @@ export default class EventForm extends React.Component {
     return (
       <form className='container-fluid col-12 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
         {this.state.isOpen === true &&
-          <div>Placeholder</div>
+          <div><Modal /></div>
         }
         <div className='d-flex justify-content-between align-items-center mb-3'>
           <a href='#' className='red fs-5 text-decoration-none'>Cancel</a>
