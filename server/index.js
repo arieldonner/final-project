@@ -230,10 +230,11 @@ app.get('/api/outfits', (req, res, next) => {
   const { userId } = req.user;
   const sql = `
     select "outfitName",
+            "outfitImg",
             "category",
             "star",
             "outfitId"
-      from "events"
+      from "outfits"
       where "userId" = $1`;
   const params = [userId];
   db.query(sql, params)
