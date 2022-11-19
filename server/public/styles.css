@@ -202,8 +202,16 @@ body {
   border-bottom: 1px solid white;
 }
 
-.button-position {
-  position: absolute;
-  top: 100px;
-  right: 300px;
+.outfit-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.circle {
+  border: 2px solid #1976d2;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
 }

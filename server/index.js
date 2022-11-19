@@ -226,6 +226,21 @@ app.delete('/api/delete/event/:eventId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/outfits', (req, res, next) => {
+  const { userId } = req.user;
+  const sql = `
+    select "outfitName",
+            "category",
+            "star",
+            "outfitId"
+      from "events"
+      where "userId" = $1`;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
