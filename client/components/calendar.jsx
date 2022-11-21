@@ -2,7 +2,6 @@ import React from 'react';
 import Calendar from 'react-calendar/dist/cjs/Calendar';
 import 'react-calendar/dist/Calendar.css';
 import EventTile from './event-tile';
-import { AppContext } from '../lib';
 
 export default class CalendarPage extends React.Component {
   constructor(props) {
@@ -62,5 +61,3 @@ export default class CalendarPage extends React.Component {
     );
   }
 }
-
-CalendarPage.contextType = AppContext;
