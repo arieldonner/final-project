@@ -23,7 +23,7 @@ insert into "outfits" (
   "star"
 ) values (
   1,
-  'test.jpg',
+  'https://litb-cgis.rightinthebox.com/images/384x500/202110/bps/product/inc/fqdfpu1635163742663.jpg',
   'Rock & Roll',
   'Synchro',
   'tan in boot',
