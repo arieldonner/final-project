@@ -224,3 +224,27 @@ body {
   text-align: center;
   border-radius: 16px;
 }
+
+.sad {
+  width: 42%;
+  height: 42%;
+  border-radius: 50%;
+  object-fit: cover;
+  color: #1976d2;
+}
+
+.blue-back {
+  background-color: #76baff;
+}
+
+.pink-back {
+  background-color: #f1b8ff;
+}
+
+.pale-back {
+  background-color: #f5c6cb;
+}
+
+.purple-back {
+  background-color: #7b61ff;
+}

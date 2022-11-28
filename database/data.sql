@@ -30,6 +30,15 @@ insert into "outfits" (
   'nuetral tones',
   null,
   false
+), (
+  1,
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6Wk6CVIhGdcFinwnLB7B1KWhjHOEiU6CX2zmPle-NMkCetOj1AaSUCJxijVlEQ2pcLxg&usqp=CAU',
+  'Shatter Me',
+  'Single',
+  'tan in boot',
+  'nuetral tones',
+  null,
+  false
 );
 
 insert into "events" (
