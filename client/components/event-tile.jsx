@@ -1,5 +1,5 @@
 import React from 'react';
-import { convertTime, AppContext } from '../lib';
+import { convertTime } from '../lib';
 
 export default class EventTile extends React.Component {
   constructor(props) {
@@ -73,5 +73,3 @@ export default class EventTile extends React.Component {
     );
   }
 }
-
-EventTile.contextType = AppContext;

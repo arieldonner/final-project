@@ -42,17 +42,17 @@ export default class Navbar extends React.Component {
         return (
           <nav className='container-fluid nav-container'>
             <div className='white row align-items-center'>
-              <div className='col-1 cookie brand'>IceTime</div>
+              <div className='col-1 col-md-1 cookie brand'>IceTime</div>
               <div className='col-1 d-none d-md-block'>
                 <a href='#' className='nav-links p-0'>Events</a>
               </div>
               <div className='col-1 d-none d-md-block'>
                 <a href='#outfits' className='nav-links p-0'>Outfits</a>
               </div>
-              <div className='col-1 d-none d-md-block'>
+              <div className='col-2 d-none d-md-block'>
                 <a href='#about' className='nav-links p-0'>About</a>
               </div>
-              <div className='col-7 d-none d-md-block text-end logout'>
+              <div className='col-3 col-md-6 d-none d-md-block text-end logout'>
                 <a href='#sign-in' className='nav-links p-0' onClick={handleSignOut}>
                   Log Out
                   <i className="fa-regular fa-circle-user ps-2" />
@@ -103,7 +103,7 @@ export default class Navbar extends React.Component {
                 <a href='#' className='nav-links p-0'>Events</a>
               </div>
               <div className='col-1 ps-3'>
-                <a href='#' className='nav-links p-0'>Outfits</a>
+                <a href='#outfits' className='nav-links p-0'>Outfits</a>
               </div>
               <div className='col-1 ps-3'>
                 <a href='#' className='nav-links p-0'>About</a>

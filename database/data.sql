@@ -23,9 +23,18 @@ insert into "outfits" (
   "star"
 ) values (
   1,
-  'test.jpg',
+  'https://litb-cgis.rightinthebox.com/images/384x500/202110/bps/product/inc/fqdfpu1635163742663.jpg',
   'Rock & Roll',
   'Synchro',
+  'tan in boot',
+  'nuetral tones',
+  null,
+  false
+), (
+  1,
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6Wk6CVIhGdcFinwnLB7B1KWhjHOEiU6CX2zmPle-NMkCetOj1AaSUCJxijVlEQ2pcLxg&usqp=CAU',
+  'Shatter Me',
+  'Single',
   'tan in boot',
   'nuetral tones',
   null,
