@@ -245,17 +245,17 @@ app.get('/api/outfits', (req, res, next) => {
 
 app.post('/api/create/outfit', uploadsMiddleware, (req, res, next) => {
   const { userId } = req.user;
-  const { outfitName, category, bottoms, makeup } = req.body;
+  const { outfitName, category, bottoms, makeup, star } = req.body;
   if (!outfitName || !category) {
     throw new ClientError(400, 'Outfit Name and Category are required fields.');
   }
   const outfitImg = '/images' + req.file.filename;
   const sql = `
-  insert into "outfits" ("userId", "outfitName", "outfitImg", "category", "bottoms", "makeup")
-  values ($1, $2, $3, $4, $5, $6)
+  insert into "outfits" ("userId", "outfitName", "outfitImg", "category", "bottoms", "makeup", "star")
+  values ($1, $2, $3, $4, $5, $6, $7)
   returning *
   `;
-  const params = [userId, outfitName, outfitImg, category, bottoms, makeup];
+  const params = [userId, outfitName, outfitImg, category, bottoms, makeup, star];
   db.query(sql, params)
     .then(result => {
       const [outfit] = result.rows;

@@ -16,6 +16,7 @@ export default class OutfitForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleModal = this.handleModal.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.fileInputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -30,14 +31,21 @@ export default class OutfitForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { route } = this.context;
+
+    const formData = new FormData();
+    formData.append('outfitName', this.state.outfitName);
+    formData.append('outfitImg', this.fileInputRef.current.files[0]);
+    formData.append('category', this.state.category);
+    formData.append('bottoms', this.state.bottoms);
+    formData.append('makeup', this.state.makeup);
+
     if (route.path === 'create-outfit') {
       const req = {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'x-access-token': localStorage.getItem('jwt')
         },
-        body: JSON.stringify(this.state)
+        body: formData
       };
       fetch('/api/create/outfit', req)
         .then(res => res.json())
