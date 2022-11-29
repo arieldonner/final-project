@@ -5,6 +5,7 @@ import AuthPage from './pages/auth';
 import CreateEventPage from './pages/create-event';
 import EditEventPage from './pages/edit-event';
 import Outfits from './pages/outfits';
+import CreateOutfitPage from './pages/create-outfit';
 import { parseRoute, AppContext } from './lib';
 
 export default class App extends React.Component {
@@ -58,6 +59,9 @@ export default class App extends React.Component {
     }
     if (path === 'outfits') {
       return <Outfits />;
+    }
+    if (path === 'create-outfit') {
+      return <CreateOutfitPage />;
     }
     // if (route.path === 'about') {
 
