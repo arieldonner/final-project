@@ -124,28 +124,28 @@ export default class OutfitForm extends React.Component {
               name="category"
               value="Synchro"
               onChange={handleChange} />
-            <label htmlFor='Synchro' className='pe-3 pe-m-5'>Synchro</label>
+            <label htmlFor='Synchro' className='pe-3 pe-m-5 ms-m-1'>Synchro</label>
             <input
               id='Singles'
               type="radio"
               name="category"
               value="Singles"
               onChange={handleChange} />
-            <label htmlFor='Singles' className='pe-3 pe-m-5'>Singles</label>
+            <label htmlFor='Singles' className='pe-3 pe-m-5 ms-m-1'>Singles</label>
             <input
               id='Dance'
               type="radio"
               name="category"
               value="Dance"
               onChange={handleChange} />
-            <label htmlFor='Dance' className='pe-3 pe-m-5'>Dance</label>
+            <label htmlFor='Dance' className='pe-3 pe-m-5 ms-m-1'>Dance</label>
             <input
               id='Pairs'
               type="radio"
               name="category"
               value="Pairs"
               onChange={handleChange} />
-            <label htmlFor='Pairs'>Pairs</label>
+            <label htmlFor='Pairs' className='ms-m-1'>Pairs</label>
           </div>
         </div>
         <div className='mb-4'>
@@ -169,8 +169,8 @@ export default class OutfitForm extends React.Component {
             className="form-control" />
         </div>
         <div className='mb-4'>
-          <input type="checkbox" id="star" name="star" value={true} />
-          <label htmlFor="star">Favorite</label>
+          <input type="checkbox" id="star" name="star" value={true} className='me-2'/>
+          <label htmlFor="star">Favorite this outfit</label>
         </div>
         {/* <div className='d-flex justify-content-center'>
           {route.path === 'edit-event' && <button onClick={this.handleModal} className='btn btn-outline-danger'>Delete Event</button>}
