@@ -72,14 +72,38 @@ export default class OutfitForm extends React.Component {
             className="form-control" />
         </div>
         <div className='mb-4'>
-          <label htmlFor='category' className='form-label'>Category:</label>
-          <input
-            id='Synchro'
-            type="radio"
-            name="category"
-            value={this.state.category}
-            onChange={handleChange} />
-          <label htmlFor='Synchro'>Synchro</label>
+          <p>Category:</p>
+          <div>
+            <input
+              required
+              id='Synchro'
+              type="radio"
+              name="category"
+              value={this.state.category}
+              onChange={handleChange} />
+            <label htmlFor='Synchro' className='pe-3 pe-m-5'>Synchro</label>
+            <input
+              id='Singles'
+              type="radio"
+              name="category"
+              value={this.state.category}
+              onChange={handleChange} />
+            <label htmlFor='Singles' className='pe-3 pe-m-5'>Singles</label>
+            <input
+              id='Dance'
+              type="radio"
+              name="category"
+              value={this.state.category}
+              onChange={handleChange} />
+            <label htmlFor='Dance' className='pe-3 pe-m-5'>Dance</label>
+            <input
+              id='Pairs'
+              type="radio"
+              name="category"
+              value={this.state.category}
+              onChange={handleChange} />
+            <label htmlFor='Pairs'>Pairs</label>
+          </div>
         </div>
         <div className='mb-4'>
           <label htmlFor='bottoms' className='form-label'>Bottoms:</label>
