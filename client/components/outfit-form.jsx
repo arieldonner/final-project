@@ -5,7 +5,12 @@ export default class OutfitForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      outfit: []
+      outfitName: '',
+      outfitImg: '',
+      category: '',
+      bottoms: '',
+      makeup: '',
+      show: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +29,22 @@ export default class OutfitForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // const { route } = this.context;
+    const { route } = this.context;
+    if (route.path === 'create-outfit') {
+      const req = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('jwt')
+        },
+        body: JSON.stringify(this.state)
+      };
+      fetch('/api/create/outfit', req)
+        .then(res => res.json())
+        .then(result => {
+          window.location.hash = '#outfits';
+        });
+    }
 
   }
 
@@ -58,7 +78,7 @@ export default class OutfitForm extends React.Component {
           </div>
         } */}
         <div className='d-flex justify-content-between align-items-center mb-3'>
-          <a href='#' className='red fs-5 text-decoration-none'>Cancel</a>
+          <a href='#outfits' className='red fs-5 text-decoration-none'>Cancel</a>
           <button type='submit' className='blue btn btn-link text-decoration-none'><span className='fs-5'>Submit</span></button>
         </div>
         <div className='mb-4'>
@@ -129,12 +149,12 @@ export default class OutfitForm extends React.Component {
             className="form-control" />
         </div>
         <div className='mb-4'>
-          <label htmlFor='extras' className='form-label'>Extras:</label>
+          <label htmlFor='makeup' className='form-label'>Makeup:</label>
           <textarea
-            id='extras'
+            id='makeup'
             type="text"
-            name="extras"
-            value={this.state.extras}
+            name="makeup"
+            value={this.state.makeup}
             onChange={handleChange}
             className="form-control" />
         </div>
