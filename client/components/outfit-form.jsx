@@ -6,10 +6,10 @@ export default class OutfitForm extends React.Component {
     super(props);
     this.state = {
       outfitName: '',
-      outfitImg: '',
       category: '',
       bottoms: '',
       makeup: '',
+      star: false,
       show: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -34,10 +34,11 @@ export default class OutfitForm extends React.Component {
 
     const formData = new FormData();
     formData.append('outfitName', this.state.outfitName);
-    formData.append('outfitImg', this.fileInputRef.current.files[0]);
+    formData.append('image', this.fileInputRef.current.files[0]);
     formData.append('category', this.state.category);
     formData.append('bottoms', this.state.bottoms);
     formData.append('makeup', this.state.makeup);
+    formData.append('star', this.state.star);
 
     if (route.path === 'create-outfit') {
       const req = {
@@ -107,7 +108,8 @@ export default class OutfitForm extends React.Component {
             required
             id='outfitImg'
             type="file"
-            name="outfitImg"
+            name="image"
+            ref={this.fileInputRef}
             accept=".png, .jpg, .jpeg"
             value={this.state.outfitImg}
             onChange={handleChange} />
@@ -120,28 +122,28 @@ export default class OutfitForm extends React.Component {
               id='Synchro'
               type="radio"
               name="category"
-              value={this.state.category}
+              value="Synchro"
               onChange={handleChange} />
             <label htmlFor='Synchro' className='pe-3 pe-m-5'>Synchro</label>
             <input
               id='Singles'
               type="radio"
               name="category"
-              value={this.state.category}
+              value="Singles"
               onChange={handleChange} />
             <label htmlFor='Singles' className='pe-3 pe-m-5'>Singles</label>
             <input
               id='Dance'
               type="radio"
               name="category"
-              value={this.state.category}
+              value="Dance"
               onChange={handleChange} />
             <label htmlFor='Dance' className='pe-3 pe-m-5'>Dance</label>
             <input
               id='Pairs'
               type="radio"
               name="category"
-              value={this.state.category}
+              value="Pairs"
               onChange={handleChange} />
             <label htmlFor='Pairs'>Pairs</label>
           </div>
@@ -165,6 +167,10 @@ export default class OutfitForm extends React.Component {
             value={this.state.makeup}
             onChange={handleChange}
             className="form-control" />
+        </div>
+        <div className='mb-4'>
+          <input type="checkbox" id="star" name="star" value={true} />
+          <label htmlFor="star">Favorite</label>
         </div>
         {/* <div className='d-flex justify-content-center'>
           {route.path === 'edit-event' && <button onClick={this.handleModal} className='btn btn-outline-danger'>Delete Event</button>}

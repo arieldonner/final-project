@@ -249,7 +249,7 @@ app.post('/api/create/outfit', uploadsMiddleware, (req, res, next) => {
   if (!outfitName || !category) {
     throw new ClientError(400, 'Outfit Name and Category are required fields.');
   }
-  const outfitImg = '/images' + req.file.filename;
+  const outfitImg = '/images/' + req.file.filename;
   const sql = `
   insert into "outfits" ("userId", "outfitName", "outfitImg", "category", "bottoms", "makeup", "star")
   values ($1, $2, $3, $4, $5, $6, $7)
