@@ -23,6 +23,8 @@ export default class OutfitForm extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
+    // const { route } = this.context;
 
   }
 
@@ -60,16 +62,27 @@ export default class OutfitForm extends React.Component {
           <button type='submit' className='blue btn btn-link text-decoration-none'><span className='fs-5'>Submit</span></button>
         </div>
         <div className='mb-4'>
-          <label htmlFor='dressName' className='form-label'>Dress Name:</label>
+          <label htmlFor='outfitName' className='form-label'>Dress Name:</label>
           <input
             required
             autoFocus
-            id='dressName'
+            id='outfitName'
             type="text"
-            name="dressName"
-            value={this.state.dressName}
+            name="outfitName"
+            value={this.state.outfitName}
             onChange={handleChange}
             className="form-control" />
+        </div>
+        <div className='mb-4'>
+          <p>Dress Picture:</p>
+          <input
+            required
+            id='outfitImg'
+            type="file"
+            name="outfitImg"
+            accept=".png, .jpg, .jpeg"
+            value={this.state.outfitImg}
+            onChange={handleChange} />
         </div>
         <div className='mb-4'>
           <p>Category:</p>
