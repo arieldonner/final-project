@@ -8,6 +8,7 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const ClientError = require('./client-error');
 const authorizationMiddleware = require('./authorization-middleware');
+const uploadsMiddleware = require('./uploads-middleware');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -239,6 +240,27 @@ app.get('/api/outfits', (req, res, next) => {
   const params = [userId];
   db.query(sql, params)
     .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.post('/api/create/outfit', uploadsMiddleware, (req, res, next) => {
+  const { userId } = req.user;
+  const { outfitName, category, bottoms, makeup, star } = req.body;
+  if (!outfitName || !category) {
+    throw new ClientError(400, 'Outfit Name and Category are required fields.');
+  }
+  const outfitImg = '/images/' + req.file.filename;
+  const sql = `
+  insert into "outfits" ("userId", "outfitName", "outfitImg", "category", "bottoms", "makeup", "star")
+  values ($1, $2, $3, $4, $5, $6, $7)
+  returning *
+  `;
+  const params = [userId, outfitName, outfitImg, category, bottoms, makeup, star];
+  db.query(sql, params)
+    .then(result => {
+      const [outfit] = result.rows;
+      res.status(201).json(outfit);
+    })
     .catch(err => next(err));
 });
 
