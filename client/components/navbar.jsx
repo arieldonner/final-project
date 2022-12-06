@@ -42,23 +42,23 @@ export default class Navbar extends React.Component {
         return (
           <nav className='container-fluid nav-container'>
             <div className='white row align-items-center'>
-              <div className='col-1 col-lg-1 cookie brand'>IceTime</div>
-              <div className='col-1 d-none d-lg-block'>
+              <div className='col-1 col-lg-1 cookie brand min-w'>IceTime</div>
+              <div className='col-1 d-none d-lg-block min-w'>
                 <a href='#' className='nav-links p-0'>Events</a>
               </div>
-              <div className='col-1 d-none d-lg-block'>
+              <div className='col-1 d-none d-lg-block min-w'>
                 <a href='#outfits' className='nav-links p-0'>Outfits</a>
               </div>
               <div className='col-2 d-none d-lg-block'>
                 <a href='#about' className='nav-links p-0'>About</a>
               </div>
-              <div className='col-3 col-lg-6 d-none d-lg-block text-end logout'>
+              <div className='col-3 col-lg-5 col-xl-6 d-none d-lg-block text-end logout'>
                 <a href='#sign-in' className='nav-links p-0' onClick={handleSignOut}>
                   Log Out
                   <i className="fa-regular fa-circle-user ps-2" />
                 </a>
               </div>
-              <div className='col-9 .d-none .d-sm-block .d-lg-none d-lg-none d-xl-none text-end logout'>
+              <div className='col-6 col-sm-8 col-md-9 .d-none .d-sm-block .d-lg-none d-lg-none d-xl-none text-end logout'>
                 <i className="fa-solid fa-bars" onClick={this.handleClick} />
               </div>
             </div>
