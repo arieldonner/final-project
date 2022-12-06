@@ -58,7 +58,7 @@ export default class EventTile extends React.Component {
         {this.state.event.map(event => (
           <a key={event.eventId} href={`#edit-event?eventId=${event.eventId}`} className='tile col-sm-12 col-md-10 ps-4 mb-3 text-decoration-none'>
             <div className='row align-items-center'>
-              <div className='col-8 col-md-9'>
+              <div className='col-8 col-lg-9'>
                 <h3 className='blue'>{event.eventName}</h3>
                 <p className='black'>Location: <span className='blue'>{event.locationName}</span></p>
               </div>
