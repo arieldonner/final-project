@@ -5,7 +5,7 @@ import { faFaceSadCry } from '@fortawesome/free-regular-svg-icons';
 export default class ViewOutfits extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { outfits: null };
+    this.state = { outfits: null, loading: true };
   }
 
   componentDidMount() {
@@ -17,9 +17,9 @@ export default class ViewOutfits extends React.Component {
       .then(res => res.json())
       .then(res => {
         if (res.length === 0) {
-          this.setState({ outfits: null });
+          this.setState({ outfits: null, loading: false });
         } else {
-          this.setState({ outfits: res });
+          this.setState({ outfits: res, loading: false });
         }
       });
   }
@@ -31,8 +31,13 @@ export default class ViewOutfits extends React.Component {
           <h1 className='col-8 col-md-7 col-lg-4 ps-5 heading cookie'>Outfits</h1>
           <a href='#create-outfit' className='btn btn-primary button-position'>New+</a>
         </div>
+        {this.state.loading === true &&
+          <div className='d-flex justify-content-center'>
+            <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
+          </div>
+        }
         <div className='container'>
-          {!this.state.outfits &&
+          {this.state.loadding === false && !this.state.outfits &&
             <div className='container ps-1 pe-1'>
               <div className='row justify-content-center'>
                 <div className='tile col-sm-12 col-md-10 col-lg-6 d-flex gap-4 ps-4 pt-2 pb-2'>

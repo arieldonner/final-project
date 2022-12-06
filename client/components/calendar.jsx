@@ -6,7 +6,7 @@ import EventTile from './event-tile';
 export default class CalendarPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: new Date(), events: [] };
+    this.state = { value: new Date(), events: [], loading: true };
     this.onChange = this.onChange.bind(this);
   }
 
@@ -22,7 +22,7 @@ export default class CalendarPage extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.setState({ events: res });
+        this.setState({ events: res, loading: false });
       });
   }
 
@@ -31,6 +31,11 @@ export default class CalendarPage extends React.Component {
       <div className='container-fluid'>
         <h1 className='heading cookie'>Events</h1>
         <div className='container'>
+          {this.state.loading === true &&
+            <div className='d-flex justify-content-center'>
+              <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
+            </div>
+          }
           <div className='row'>
             <div className='col-sm-12 col-md-6 order-sm-1 order-md-2'>
               <div className='row align-items-center justify-content-center mb-3 ms-lg-5 ps-3 ps-md-0'>

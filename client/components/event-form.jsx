@@ -10,7 +10,8 @@ export default class EventForm extends React.Component {
       startTime: '',
       endTime: '',
       locationName: '',
-      show: false
+      show: false,
+      loading: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,8 +33,11 @@ export default class EventForm extends React.Component {
           startDate: event.startDate.slice(0, 10),
           startTime: event.startTime,
           endTime: event.endTime,
-          locationName: event.locationName
+          locationName: event.locationName,
+          loading: false
         }));
+    } else {
+      this.setState({ loading: false });
     }
   }
 
@@ -101,6 +105,11 @@ export default class EventForm extends React.Component {
     const { route } = this.context;
     return (
       <form className='container-fluid col-12 col-md-9 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
+        {this.state.loading === true &&
+          <div className='d-flex justify-content-center'>
+            <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
+          </div>
+        }
         {this.state.isOpen === true &&
           <div className='my-modal'>
             <div className='my-modal-content'>
