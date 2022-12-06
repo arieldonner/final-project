@@ -100,7 +100,7 @@ export default class EventForm extends React.Component {
     const { handleChange, handleSubmit } = this;
     const { route } = this.context;
     return (
-      <form className='container-fluid col-12 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
+      <form className='container-fluid col-12 col-md-9 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
         {this.state.isOpen === true &&
           <div className='my-modal'>
             <div className='my-modal-content'>
