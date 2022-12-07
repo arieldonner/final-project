@@ -4,8 +4,8 @@ export default class AuthForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
-      password: ''
+      userName: 'username',
+      password: 'password1'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,6 +61,7 @@ export default class AuthForm extends React.Component {
             <input
             required
             autoFocus
+            defaultValue="username"
             id='userName'
             type="text"
             name="userName"
@@ -71,6 +72,7 @@ export default class AuthForm extends React.Component {
             <label htmlFor='password' className='form-label'>Password</label>
             <input
             required
+            defaultValue='password1'
             id='password'
             type="password"
             name="password"

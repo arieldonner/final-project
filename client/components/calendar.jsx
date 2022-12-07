@@ -2,11 +2,12 @@ import React from 'react';
 import Calendar from 'react-calendar/dist/cjs/Calendar';
 import 'react-calendar/dist/Calendar.css';
 import EventTile from './event-tile';
+import NotFound from './not-found';
 
 export default class CalendarPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: new Date(), events: [] };
+    this.state = { value: new Date(), events: [], loading: true, error: false };
     this.onChange = this.onChange.bind(this);
   }
 
@@ -22,7 +23,10 @@ export default class CalendarPage extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.setState({ events: res });
+        this.setState({ events: res, loading: false, error: false });
+      })
+      .catch(() => {
+        this.setState({ error: true });
       });
   }
 
@@ -30,12 +34,20 @@ export default class CalendarPage extends React.Component {
     return (
       <div className='container-fluid'>
         <h1 className='heading cookie'>Events</h1>
+        {this.state.error === true &&
+          <NotFound />
+        }
         <div className='container'>
+          {this.state.loading === true &&
+            <div className='d-flex justify-content-center'>
+              <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
+            </div>
+          }
           <div className='row'>
             <div className='col-sm-12 col-md-6 order-sm-1 order-md-2'>
-              <div className='row align-items-center justify-content-center mb-3 ms-md-5 ps-3 ps-md-0'>
+              <div className='row align-items-center justify-content-center mb-3 ms-lg-5 ps-3 ps-md-0'>
                 <i className="fa-regular fa-rectangle-list col-3" />
-                <a href='#create-event' className='btn btn-primary col-3 col-md-2 offset-4 offset-md-1'>New+</a>
+                <a href='#create-event' className='btn btn-primary col-3 col-lg-2 offset-4 offset-md-1'>New+</a>
               </div>
               <div className='row justify-content-center'>
                 <Calendar onChange={this.onChange} value={this.state.value}
