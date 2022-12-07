@@ -2,11 +2,12 @@ import React from 'react';
 import Calendar from 'react-calendar/dist/cjs/Calendar';
 import 'react-calendar/dist/Calendar.css';
 import EventTile from './event-tile';
+import NotFound from './not-found';
 
 export default class CalendarPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: new Date(), events: [], loading: true };
+    this.state = { value: new Date(), events: [], loading: true, error: false };
     this.onChange = this.onChange.bind(this);
   }
 
@@ -22,10 +23,10 @@ export default class CalendarPage extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.setState({ events: res, loading: false });
+        this.setState({ events: res, loading: false, error: false });
       })
       .catch(() => {
-        window.location.hash = 'error';
+        this.setState({ error: true });
       });
   }
 
@@ -33,6 +34,9 @@ export default class CalendarPage extends React.Component {
     return (
       <div className='container-fluid'>
         <h1 className='heading cookie'>Events</h1>
+        {this.state.error === true &&
+          <NotFound />
+        }
         <div className='container'>
           {this.state.loading === true &&
             <div className='d-flex justify-content-center'>

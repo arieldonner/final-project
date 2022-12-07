@@ -1,11 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSadCry } from '@fortawesome/free-regular-svg-icons';
+import NotFound from './not-found';
 
 export default class ViewOutfits extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { outfits: null, loading: true };
+    this.state = { outfits: null, loading: true, error: false };
   }
 
   componentDidMount() {
@@ -17,13 +18,13 @@ export default class ViewOutfits extends React.Component {
       .then(res => res.json())
       .then(res => {
         if (res.length === 0) {
-          this.setState({ outfits: null, loading: false });
+          this.setState({ outfits: null, loading: false, error: false });
         } else {
-          this.setState({ outfits: res, loading: false });
+          this.setState({ outfits: res, loading: false, error: false });
         }
       })
       .catch(() => {
-        window.location.hash = 'error';
+        this.setState({ error: true });
       });
   }
 
@@ -34,6 +35,9 @@ export default class ViewOutfits extends React.Component {
           <h1 className='col-8 col-md-7 col-lg-4 ps-5 heading cookie'>Outfits</h1>
           <a href='#create-outfit' className='btn btn-primary button-position'>New+</a>
         </div>
+        {this.state.error === true &&
+          <NotFound />
+        }
         {this.state.loading === true &&
           <div className='d-flex justify-content-center'>
             <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>

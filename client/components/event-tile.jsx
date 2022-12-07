@@ -1,10 +1,11 @@
 import React from 'react';
 import { convertTime } from '../lib';
+import NotFound from './not-found';
 
 export default class EventTile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { event: null, loading: false };
+    this.state = { event: null, loading: false, error: false };
   }
 
   componentDidMount() {
@@ -17,12 +18,12 @@ export default class EventTile extends React.Component {
       .then(res => res.json())
       .then(res => {
         if (!Response.ok) {
-          this.setState({ event: null });
+          this.setState({ event: null, error: false });
         }
-        this.setState({ event: res });
+        this.setState({ event: res, error: false });
       })
       .catch(() => {
-        window.location.hash = 'error';
+        this.setState({ error: true });
       });
   }
 
@@ -43,7 +44,7 @@ export default class EventTile extends React.Component {
           this.setState({ event: res, loading: false });
         })
         .catch(() => {
-          window.location.hash = 'error';
+          this.setState({ error: true });
         });
     }
   }
@@ -67,6 +68,9 @@ export default class EventTile extends React.Component {
     }
     return (
       <div className='row justify-content-center'>
+        {this.state.error === true &&
+          <NotFound />
+        }
         {this.state.loading === true &&
           <div className='d-flex justify-content-center'>
             <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>

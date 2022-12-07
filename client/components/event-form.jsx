@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppContext } from '../lib';
+import NotFound from './not-found';
 
 export default class EventForm extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ export default class EventForm extends React.Component {
       endTime: '',
       locationName: '',
       show: false,
-      loading: true
+      loading: true,
+      error: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,10 +36,11 @@ export default class EventForm extends React.Component {
           startTime: event.startTime,
           endTime: event.endTime,
           locationName: event.locationName,
-          loading: false
+          loading: false,
+          error: false
         }))
         .catch(() => {
-          window.location.hash = 'error';
+          this.setState({ error: true });
         });
     } else {
       this.setState({ loading: false });
@@ -108,6 +111,9 @@ export default class EventForm extends React.Component {
     const { route } = this.context;
     return (
       <form className='container-fluid col-12 col-md-9 col-md-6 p-4 form-style' onSubmit={handleSubmit}>
+        {this.state.error === true &&
+          <NotFound />
+        }
         {this.state.loading === true &&
           <div className='d-flex justify-content-center'>
             <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
