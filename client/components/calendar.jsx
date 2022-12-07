@@ -23,6 +23,9 @@ export default class CalendarPage extends React.Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ events: res, loading: false });
+      })
+      .catch(() => {
+        window.location.hash = 'error';
       });
   }
 

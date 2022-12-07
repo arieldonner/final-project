@@ -20,6 +20,9 @@ export default class EventTile extends React.Component {
           this.setState({ event: null });
         }
         this.setState({ event: res });
+      })
+      .catch(() => {
+        window.location.hash = 'error';
       });
   }
 
@@ -38,6 +41,9 @@ export default class EventTile extends React.Component {
             this.setState({ event: null, loading: false });
           }
           this.setState({ event: res, loading: false });
+        })
+        .catch(() => {
+          window.location.hash = 'error';
         });
     }
   }

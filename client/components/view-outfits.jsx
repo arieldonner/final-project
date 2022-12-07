@@ -21,6 +21,9 @@ export default class ViewOutfits extends React.Component {
         } else {
           this.setState({ outfits: res, loading: false });
         }
+      })
+      .catch(() => {
+        window.location.hash = 'error';
       });
   }
 

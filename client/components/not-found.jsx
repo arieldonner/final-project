@@ -6,7 +6,7 @@ export default class NotFound extends React.Component {
       <div>
         <div className="container-fluid">
           <h1 className="heading cookie">Uh oh!</h1>
-          <div className='row justify-content-center pb-3'>
+          <div className='row justify-content-center pt-5 pb-3'>
             <div className='tile col-sm-12 col-md-10 col-lg-7 ps-4 pt-3 mb-3'>
               <div className='d-flex align-items-center'>
                 <i className='fa-regular fa-face-dizzy p-5' />

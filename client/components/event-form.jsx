@@ -35,7 +35,10 @@ export default class EventForm extends React.Component {
           endTime: event.endTime,
           locationName: event.locationName,
           loading: false
-        }));
+        }))
+        .catch(() => {
+          window.location.hash = 'error';
+        });
     } else {
       this.setState({ loading: false });
     }
