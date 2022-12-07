@@ -37,7 +37,7 @@ export default class ViewOutfits extends React.Component {
           </div>
         }
         <div className='container'>
-          {this.state.loadding === false && !this.state.outfits &&
+          {(!this.state.outfits && this.state.loading === false) &&
             <div className='container ps-1 pe-1'>
               <div className='row justify-content-center'>
                 <div className='tile col-sm-12 col-md-10 col-lg-6 d-flex gap-4 ps-4 pt-2 pb-2'>
