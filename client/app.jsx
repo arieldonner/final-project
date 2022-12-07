@@ -64,12 +64,6 @@ export default class App extends React.Component {
     if (path === 'create-outfit') {
       return <CreateOutfitPage />;
     }
-    // if (path === 'about') {
-
-    // }
-    // if (route.path === 'register') {
-
-    // }
     return <NotFound />;
   }
 
