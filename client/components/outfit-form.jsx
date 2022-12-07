@@ -67,10 +67,10 @@ export default class OutfitForm extends React.Component {
 
   render() {
     const { handleChange, handleSubmit } = this;
-    // const { route } = this.context;
+    const { route } = this.context;
     return (
       <form className='container-fluid col-12 col-md-9 col-lg-6 p-4 form-style' onSubmit={handleSubmit}>
-        {/* {this.state.isOpen === true &&
+        {this.state.isOpen === true &&
           <div className='my-modal'>
             <div className='my-modal-content'>
               <div className='my-modal-header'>
@@ -85,7 +85,7 @@ export default class OutfitForm extends React.Component {
               </div>
             </div>
           </div>
-        } */}
+        }
         <div className='d-flex justify-content-between align-items-center mb-3'>
           <a href='#outfits' className='red fs-5 text-decoration-none'>Cancel</a>
           <button type='submit' className='blue btn btn-link text-decoration-none'><span className='fs-5'>Submit</span></button>
@@ -172,9 +172,9 @@ export default class OutfitForm extends React.Component {
           <input type="checkbox" id="star" name="star" value={true} className='me-2'/>
           <label htmlFor="star">Favorite this outfit</label>
         </div>
-        {/* <div className='d-flex justify-content-center'>
+        <div className='d-flex justify-content-center'>
           {route.path === 'edit-event' && <button onClick={this.handleModal} className='btn btn-outline-danger'>Delete Event</button>}
-        </div> */}
+        </div>
       </form>
     );
   }

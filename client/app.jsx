@@ -64,12 +64,6 @@ export default class App extends React.Component {
     if (path === 'create-outfit') {
       return <CreateOutfitPage />;
     }
-    // if (path === 'edit-outfit') {
-
-    // }
-    // if (path === 'about') {
-
-    // }
     return <NotFound />;
   }
 
