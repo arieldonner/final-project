@@ -70,9 +70,6 @@ export default class App extends React.Component {
     // if (route.path === 'register') {
 
     // }
-    if (path === 'error') {
-      return <NotFound />;
-    }
     return <NotFound />;
   }
 
