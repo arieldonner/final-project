@@ -63,7 +63,7 @@ Try the application live at [https://ice-time.arieldonner.com/](https://ice-time
 1. Clone the repository.
 
   ```shell
-    git clone https://github.com/arieldonner/final-project.git
+    git clone https://github.com/arieldonner/ice-time.git
     cd ice-time
   ```
 
@@ -73,7 +73,7 @@ Try the application live at [https://ice-time.arieldonner.com/](https://ice-time
     npm install
   ```
 
-3. Make a copy of the provided .env.example file. Name your copy .env.
+3. Make a copy of the provided .env.example file. Name your copy .env. In the DATABASE_URL, change changeMe to iceTime.
 
   ```shell
     cp .env.example .env
