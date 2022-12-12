@@ -6,11 +6,10 @@ export default class OutfitDetails extends React.Component {
     super(props);
     this.state = {
       outfitName: '',
-      startDate: '',
-      startTime: '',
-      endTime: '',
-      locationName: '',
-      show: false,
+      category: '',
+      bottoms: '',
+      makeup: '',
+      star: false,
       loading: true,
       error: false
     };
@@ -28,7 +27,13 @@ export default class OutfitDetails extends React.Component {
           <h1 className='heading cookie'>My Outfit</h1>
         </div>
         <div className='container-fluid col-12 col-md-9 col-lg-6 p-4 form-style'>
-          <p>Test</p>
+          <a href='#edit-outfit' className='red fs-5 text-decoration-none float-end'>Edit</a>
+          <div className='d-flex justify-content-center col-12'>
+            <div className='circle'>
+              <img src={this.state.outfitImg} alt='Outft image' className='outfit-img' />
+            </div>
+          </div>
+          <h2 className='blue pb-2'>{this.state.outfitName}</h2>
         </div>
       </div>
     );
