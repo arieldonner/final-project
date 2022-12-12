@@ -6,6 +6,7 @@ import CreateEventPage from './pages/create-event';
 import EditEventPage from './pages/edit-event';
 import Outfits from './pages/outfits';
 import CreateOutfitPage from './pages/create-outfit';
+import OutfitDetails from './components/outfit-details';
 import NotFound from './components/not-found';
 import { parseRoute, AppContext } from './lib';
 
@@ -63,6 +64,9 @@ export default class App extends React.Component {
     }
     if (path === 'create-outfit') {
       return <CreateOutfitPage />;
+    }
+    if (path === 'outfit-details') {
+      return <OutfitDetails />;
     }
     return <NotFound />;
   }
