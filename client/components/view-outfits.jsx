@@ -60,8 +60,8 @@ export default class ViewOutfits extends React.Component {
           }
           {this.state.outfits &&
           this.state.outfits.map(event => (
-            <a key={event.outfitId} href={`#outfit-details?outfitId=${event.outfitId}`} className='row justify-content-center pb-3 text-decoration-none'>
-              <div className='tile col-sm-12 col-md-10 col-lg-6 d-flex gap-4 ps-4 pt-2 mb-3 tile-hover'>
+            <div key={event.outfitId} className='row justify-content-center pb-3'>
+              <a href={`#outfit-details?outfitId=${event.outfitId}`} className='tile col-sm-12 col-md-10 col-lg-6 d-flex gap-4 ps-4 pt-2 mb-3 text-decoration-none tile-hover'>
                 <div className='circle'>
                   <img src={event.outfitImg} alt='Outft image' className='outfit-img' />
                 </div>
@@ -80,8 +80,8 @@ export default class ViewOutfits extends React.Component {
                     <span className='my-badge purple-back'>{event.category}</span>
                   }
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
           ))}
         </div>
       </div>
