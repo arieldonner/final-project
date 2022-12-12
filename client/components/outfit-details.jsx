@@ -11,7 +11,6 @@ export default class OutfitDetails extends React.Component {
       category: '',
       bottoms: '',
       makeup: '',
-      star: false,
       loading: true,
       error: false
     };
