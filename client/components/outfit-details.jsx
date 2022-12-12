@@ -6,6 +6,7 @@ export default class OutfitDetails extends React.Component {
     super(props);
     this.state = {
       outfitName: '',
+      outfitImg: '',
       category: '',
       bottoms: '',
       makeup: '',
@@ -16,7 +17,25 @@ export default class OutfitDetails extends React.Component {
   }
 
   componentDidMount() {
-
+    fetch(`/api/outfit/${this.props.outfitId}`, {
+      headers: {
+        'x-access-token': localStorage.getItem('jwt')
+      }
+    })
+      .then(res => res.json())
+      .then(outfit => this.setState({
+        outfitName: outfit.outfitName,
+        outfitImg: outfit.outfitImg,
+        category: outfit.category,
+        bottoms: outfit.bottoms,
+        makeup: outfit.makeup,
+        star: outfit.star,
+        loading: false,
+        error: false
+      }))
+      .catch(() => {
+        this.setState({ error: true });
+      });
   }
 
   render() {

@@ -66,7 +66,10 @@ export default class App extends React.Component {
       return <CreateOutfitPage />;
     }
     if (path === 'outfit-details') {
-      return <OutfitDetails />;
+      const queryString = window.location.hash.slice(16);
+      const params = new URLSearchParams(queryString);
+      const outfitId = params.get('outfitId');
+      return <OutfitDetails outfitId={outfitId}/>;
     }
     return <NotFound />;
   }
