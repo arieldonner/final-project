@@ -43,7 +43,7 @@ export default class OutfitDetails extends React.Component {
       <div className="container-fluid">
         <div className='d-flex justify-content-center align-items-center col-12'>
           <a href='#outfits'><i className="fa-solid fa-chevron-left blue" /></a>
-          <h1 className='heading cookie'>My Outfit</h1>
+          <h1 className='heading cookie col-10 col-md-8 col-lg-5'>My Outfit</h1>
         </div>
         {this.state.error === true &&
           <NotFound />
@@ -56,31 +56,27 @@ export default class OutfitDetails extends React.Component {
         <div className='container-fluid col-12 col-md-9 col-lg-6 p-4 form-style'>
           <a href='#edit-outfit' className='red fs-5 text-decoration-none float-end'>Edit</a>
           <div className='d-flex justify-content-center col-12'>
-            <div className='circle'>
+            <div className='big-circle mb-2'>
               <img src={this.state.outfitImg} alt='Outft image' className='outfit-img' />
             </div>
           </div>
-          <div className='d-flex align-items-baseline justify-content-between'>
+          <div>
             <h2 className='blue pb-2'>{this.state.outfitName}</h2>
-            {this.state.star === true &&
-              <i className="fa-solid fa-star" />
+          </div>
+          <div className='d-flex'>
+            {this.state.category === 'Synchro' &&
+              <span className='my-badge pink-back'>{this.state.category}</span>
             }
-            {this.state.star === false &&
-              <i className="fa-regular fa-star" />
+            {this.state.category === 'Single' &&
+              <span className='my-badge blue-back'>{this.state.category}</span>
+            }
+            {this.state.category === 'Pairs' &&
+              <span className='my-badge pale-back'>{this.state.category}</span>
+            }
+            {this.state.category === 'Dance' &&
+              <span className='my-badge purple-back'>{this.state.category}</span>
             }
           </div>
-          {this.state.category === 'Synchro' &&
-            <span className='my-badge pink-back'>{this.state.category}</span>
-          }
-          {this.state.category === 'Single' &&
-            <span className='my-badge blue-back'>{this.state.category}</span>
-          }
-          {this.state.category === 'Pairs' &&
-            <span className='my-badge pale-back'>{this.state.category}</span>
-          }
-          {this.state.category === 'Dance' &&
-            <span className='my-badge purple-back'>{this.state.category}</span>
-          }
           <div>
             <h5 className='mt-3 mb-0'>Bottoms:</h5>
             <p className='blue pb-2'>{this.state.bottoms}</p>
