@@ -73,7 +73,7 @@ export default class App extends React.Component {
       return <OutfitDetails outfitId={outfitId}/>;
     }
     if (path === 'edit-outfit') {
-      const queryString = window.location.hash.slice(16);
+      const queryString = window.location.hash.slice(13);
       const params = new URLSearchParams(queryString);
       const outfitId = params.get('outfitId');
       return <EditOutfitPage outfitId={outfitId} />;

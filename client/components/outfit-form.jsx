@@ -6,11 +6,14 @@ export default class OutfitForm extends React.Component {
     super(props);
     this.state = {
       outfitName: '',
+      outfitImg: '',
       category: '',
       bottoms: '',
       makeup: '',
       star: false,
-      show: false
+      show: false,
+      loading: true,
+      error: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,7 +25,29 @@ export default class OutfitForm extends React.Component {
   componentDidMount() {
     const { route } = this.context;
     if (route.path === 'edit-outfit') {
-      // console.log('test');
+      fetch(`/api/outfit/${this.props.outfitId}`, {
+        headers: {
+          'x-access-token': localStorage.getItem('jwt')
+        }
+      })
+        .then(res => res.json())
+        .then(outfit => {
+          // console.log(outfit);
+          this.setState({
+            outfitName: outfit.outfitName,
+            // outfitImg: outfit.outfitImg,
+            category: outfit.category,
+            bottoms: outfit.bottoms,
+            makeup: outfit.makeup,
+            loading: false,
+            error: false
+          });
+        })
+        .catch(() => {
+          this.setState({ error: true });
+        });
+    } else {
+      this.setState({ loading: false });
     }
   }
 
@@ -71,6 +96,7 @@ export default class OutfitForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     const { route } = this.context;
+    // console.log(this.state);
     return (
       <form className='container-fluid col-12 col-md-9 col-lg-6 p-4 form-style' onSubmit={handleSubmit}>
         {this.state.isOpen === true &&

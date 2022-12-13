@@ -15,7 +15,7 @@ export default class EditOutfitPage extends React.Component {
         <Navbar />
         <div className="container-fluid">
           <h1 className="heading cookie">Edit Outfit</h1>
-          <OutfitForm eventId={this.state.outfitId} />
+          <OutfitForm outfitId={this.state.outfitId} />
         </div>
       </div>
     );
