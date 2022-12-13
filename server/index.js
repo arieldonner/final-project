@@ -290,6 +290,34 @@ app.get('/api/outfit/:outfitId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/edit/outfit/:eventId', (req, res, next) => {
+  const outfitId = Number(req.params.outfitId);
+  const editOutfit = req.body;
+  if (!outfitId) {
+    throw new ClientError(400, 'outfitId must be a positive integer');
+  }
+  const sql = `
+    update "outfits"
+      set "outfitName" = $1,
+          "outfitImg" = $2,
+          "category" = $3,
+          "bottoms" = $4,
+          "makeup" = $5
+      where "outfitId" = $6
+      returning *
+      `;
+  const params = [editOutfit.outfitName, editOutfit.outfitImg, editOutfit.category, editOutfit.bottoms, editOutfit.makeup, outfitId];
+  db.query(sql, params)
+    .then(result => {
+      const event = result.rows[0];
+      if (!event) {
+        throw new ClientError(404, `Cannot find event with outfitId ${outfitId}`);
+      }
+      res.status(201).json(event);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

@@ -82,6 +82,9 @@ export default class OutfitForm extends React.Component {
           window.location.hash = '#outfits';
         });
     }
+    // else if (route.path === 'edit-outfit') {
+
+    // }
 
   }
 
