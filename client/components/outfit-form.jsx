@@ -152,20 +152,23 @@ export default class OutfitForm extends React.Component {
               type="radio"
               name="category"
               value="Synchro"
+              checked={this.state.category === 'Synchro'}
               onChange={handleChange} />
             <label htmlFor='Synchro' className='pe-3 pe-m-5 ms-m-1'>Synchro</label>
             <input
-              id='Singles'
+              id='Single'
               type="radio"
               name="category"
-              value="Singles"
+              value="Single"
+              checked={this.state.category === 'Single'}
               onChange={handleChange} />
-            <label htmlFor='Singles' className='pe-3 pe-m-5 ms-m-1'>Singles</label>
+            <label htmlFor='Single' className='pe-3 pe-m-5 ms-m-1'>Single</label>
             <input
               id='Dance'
               type="radio"
               name="category"
               value="Dance"
+              checked={this.state.category === 'Dance'}
               onChange={handleChange} />
             <label htmlFor='Dance' className='pe-3 pe-m-5 ms-m-1'>Dance</label>
             <input
@@ -173,6 +176,7 @@ export default class OutfitForm extends React.Component {
               type="radio"
               name="category"
               value="Pairs"
+              checked={this.state.category === 'Pairs'}
               onChange={handleChange} />
             <label htmlFor='Pairs' className='ms-m-1'>Pairs</label>
           </div>
