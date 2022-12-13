@@ -20,7 +20,10 @@ export default class OutfitForm extends React.Component {
   }
 
   componentDidMount() {
-
+    const { route } = this.context;
+    if (route.path === 'edit-outfit') {
+      // console.log('test');
+    }
   }
 
   handleChange(event) {
