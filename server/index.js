@@ -264,6 +264,32 @@ app.post('/api/create/outfit', uploadsMiddleware, (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/outfit/:outfitId', (req, res, next) => {
+  const outfitId = Number(req.params.outfitId);
+  if (!outfitId) {
+    throw new ClientError(400, 'outfitId must be a positive integer');
+  }
+  const sql = `
+  select "outfitName",
+            "outfitImg",
+            "category",
+            "bottoms",
+            "makeup",
+            "star"
+      from "outfits"
+      where "outfitId" = $1
+      `;
+  const params = [outfitId];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find event with outfitId ${outfitId}`);
+      }
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
