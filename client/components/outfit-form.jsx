@@ -32,10 +32,9 @@ export default class OutfitForm extends React.Component {
       })
         .then(res => res.json())
         .then(outfit => {
-          // console.log(outfit);
           this.setState({
             outfitName: outfit.outfitName,
-            // outfitImg: outfit.outfitImg,
+            outfitImg: outfit.outfitImg,
             category: outfit.category,
             bottoms: outfit.bottoms,
             makeup: outfit.makeup,
@@ -81,10 +80,21 @@ export default class OutfitForm extends React.Component {
         .then(result => {
           window.location.hash = '#outfits';
         });
+    } else if (route.path === 'edit-outfit') {
+      const req = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('jwt')
+        },
+        body: JSON.stringify(this.state)
+      };
+      fetch(`/api/edit/outfit/${this.props.outfitId}`, req)
+        .then(res => res.json())
+        .then(result => {
+          window.location.hash = '#outfits';
+        });
     }
-    // else if (route.path === 'edit-outfit') {
-
-    // }
 
   }
 
@@ -99,7 +109,6 @@ export default class OutfitForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     const { route } = this.context;
-    // console.log(this.state);
     return (
       <form className='container-fluid col-12 col-md-9 col-lg-6 p-4 form-style' onSubmit={handleSubmit}>
         {this.state.isOpen === true &&
@@ -137,14 +146,16 @@ export default class OutfitForm extends React.Component {
         <div className='mb-4'>
           <p>Dress Picture:</p>
           <input
-            required
             id='outfitImg'
             type="file"
             name="image"
             ref={this.fileInputRef}
             accept=".png, .jpg, .jpeg"
-            value={this.state.outfitImg}
+            // value={this.state.outfitImg}
             onChange={handleChange} />
+          {route.path === 'edit-outfit' &&
+            <a href={this.state.outfitImg} target="_blank" rel="noreferrer">Click to see current file</a>
+            }
         </div>
         <div className='mb-4'>
           <p>Category:</p>
