@@ -61,11 +61,16 @@ export default class OutfitForm extends React.Component {
 
     const formData = new FormData();
     formData.append('outfitName', this.state.outfitName);
-    formData.append('image', this.fileInputRef.current.files[0]);
+    // formData.append('image', this.fileInputRef.current.files[0]);
     formData.append('category', this.state.category);
     formData.append('bottoms', this.state.bottoms);
     formData.append('makeup', this.state.makeup);
     formData.append('star', this.state.star);
+    if (this.fileInputRef.current.files[0] === undefined) {
+      formData.append('image', this.state.outfitImg);
+    } else {
+      formData.append('image', this.fileInputRef.current.files[0]);
+    }
 
     if (route.path === 'create-outfit') {
       const req = {
@@ -88,10 +93,10 @@ export default class OutfitForm extends React.Component {
         },
         body: formData
       };
-      fetch(`/api/edit/outfit/${this.props.outfitId}`, req)
+      const outfitId = this.props.outfitId;
+      fetch(`/api/edit/outfit/${outfitId}`, req)
         .then(res => res.json())
         .then(result => {
-          // console.log(result);
           window.location.hash = '#outfits';
         });
     }
@@ -109,7 +114,6 @@ export default class OutfitForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     const { route } = this.context;
-    // console.log(this.state);
     return (
       <form className='container-fluid col-12 col-md-9 col-lg-6 p-4 form-style' onSubmit={handleSubmit}>
         {this.state.isOpen === true &&

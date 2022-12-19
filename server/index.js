@@ -290,7 +290,7 @@ app.get('/api/outfit/:outfitId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.put('/api/edit/outfit/:outfitId', (req, res, next) => {
+app.put('/api/edit/outfit/:outfitId', uploadsMiddleware, (req, res, next) => {
   const outfitId = Number(req.params.outfitId);
   const editOutfit = req.body;
   if (!outfitId) {
