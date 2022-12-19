@@ -84,14 +84,14 @@ export default class OutfitForm extends React.Component {
       const req = {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
           'x-access-token': localStorage.getItem('jwt')
         },
-        body: JSON.stringify(this.state)
+        body: formData
       };
       fetch(`/api/edit/outfit/${this.props.outfitId}`, req)
         .then(res => res.json())
         .then(result => {
+          // console.log(result);
           window.location.hash = '#outfits';
         });
     }
@@ -109,6 +109,7 @@ export default class OutfitForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     const { route } = this.context;
+    // console.log(this.state);
     return (
       <form className='container-fluid col-12 col-md-9 col-lg-6 p-4 form-style' onSubmit={handleSubmit}>
         {this.state.isOpen === true &&
