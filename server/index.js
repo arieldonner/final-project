@@ -296,6 +296,10 @@ app.put('/api/edit/outfit/:outfitId', uploadsMiddleware, (req, res, next) => {
   if (!outfitId) {
     throw new ClientError(400, 'outfitId must be a positive integer');
   }
+  let outfitImg = editOutfit.outfitImg;
+  if (editOutfit.flag === true) {
+    outfitImg = req.file.location;
+  }
   const sql = `
     update "outfits"
       set "outfitName" = $1,
@@ -306,7 +310,7 @@ app.put('/api/edit/outfit/:outfitId', uploadsMiddleware, (req, res, next) => {
       where "outfitId" = $6
       returning *
       `;
-  const params = [editOutfit.outfitName, editOutfit.outfitImg, editOutfit.category, editOutfit.bottoms, editOutfit.makeup, outfitId];
+  const params = [editOutfit.outfitName, outfitImg, editOutfit.category, editOutfit.bottoms, editOutfit.makeup, outfitId];
   db.query(sql, params)
     .then(result => {
       const event = result.rows[0];

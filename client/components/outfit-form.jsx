@@ -12,6 +12,7 @@ export default class OutfitForm extends React.Component {
       makeup: '',
       star: false,
       show: false,
+      flag: false,
       loading: true,
       error: false
     };
@@ -53,6 +54,9 @@ export default class OutfitForm extends React.Component {
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    if (name === 'image') {
+      this.setState({ flag: true });
+    }
   }
 
   handleSubmit(event) {
@@ -66,8 +70,9 @@ export default class OutfitForm extends React.Component {
     formData.append('bottoms', this.state.bottoms);
     formData.append('makeup', this.state.makeup);
     formData.append('star', this.state.star);
+    formData.append('flag', this.state.flag);
     if (this.fileInputRef.current.files[0] === undefined) {
-      formData.append('image', this.state.outfitImg);
+      formData.append('outfitImg', this.state.outfitImg);
     } else {
       formData.append('image', this.fileInputRef.current.files[0]);
     }
