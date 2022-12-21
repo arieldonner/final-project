@@ -297,7 +297,7 @@ app.put('/api/edit/outfit/:outfitId', uploadsMiddleware, (req, res, next) => {
     throw new ClientError(400, 'outfitId must be a positive integer');
   }
   let outfitImg = editOutfit.outfitImg;
-  if (editOutfit.flag === true) {
+  if (editOutfit.flag === 'true') {
     outfitImg = req.file.location;
   }
   const sql = `
