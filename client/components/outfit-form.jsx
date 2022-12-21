@@ -65,7 +65,6 @@ export default class OutfitForm extends React.Component {
 
     const formData = new FormData();
     formData.append('outfitName', this.state.outfitName);
-    // formData.append('image', this.fileInputRef.current.files[0]);
     formData.append('category', this.state.category);
     formData.append('bottoms', this.state.bottoms);
     formData.append('makeup', this.state.makeup);
@@ -164,7 +163,7 @@ export default class OutfitForm extends React.Component {
             // value={this.state.outfitImg}
             onChange={handleChange} />
           {route.path === 'edit-outfit' &&
-            <a href={this.state.outfitImg} target="_blank" rel="noreferrer">Click to see current file</a>
+            <div className='mt-2'><a href={this.state.outfitImg} target="_blank" rel="noreferrer">Click here to see current file.</a></div>
             }
         </div>
         <div className='mb-4'>
