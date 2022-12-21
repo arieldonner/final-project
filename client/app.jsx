@@ -7,6 +7,7 @@ import EditEventPage from './pages/edit-event';
 import Outfits from './pages/outfits';
 import CreateOutfitPage from './pages/create-outfit';
 import OutfitDetails from './components/outfit-details';
+import EditOutfitPage from './pages/edit-outfit';
 import NotFound from './components/not-found';
 import { parseRoute, AppContext } from './lib';
 
@@ -70,6 +71,12 @@ export default class App extends React.Component {
       const params = new URLSearchParams(queryString);
       const outfitId = params.get('outfitId');
       return <OutfitDetails outfitId={outfitId}/>;
+    }
+    if (path === 'edit-outfit') {
+      const queryString = window.location.hash.slice(13);
+      const params = new URLSearchParams(queryString);
+      const outfitId = params.get('outfitId');
+      return <EditOutfitPage outfitId={outfitId} />;
     }
     return <NotFound />;
   }

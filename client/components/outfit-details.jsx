@@ -56,7 +56,7 @@ export default class OutfitDetails extends React.Component {
             </div>
           }
           <div className='container-fluid col-12 col-md-9 col-lg-6 p-4 form-style'>
-            <a href='#edit-outfit' className='red fs-5 text-decoration-none float-end'>Edit</a>
+            <a href={`#edit-outfit?outfitId=${this.props.outfitId}`} className='red fs-5 text-decoration-none float-end'>Edit</a>
             <div className='d-flex justify-content-center col-12'>
               <div className='big-circle mb-2'>
                 <img src={this.state.outfitImg} alt='Outft image' className='outfit-img' />

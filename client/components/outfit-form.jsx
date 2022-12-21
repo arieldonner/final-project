@@ -6,11 +6,15 @@ export default class OutfitForm extends React.Component {
     super(props);
     this.state = {
       outfitName: '',
+      outfitImg: '',
       category: '',
       bottoms: '',
       makeup: '',
       star: false,
-      show: false
+      show: false,
+      flag: false,
+      loading: true,
+      error: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,12 +24,39 @@ export default class OutfitForm extends React.Component {
   }
 
   componentDidMount() {
-
+    const { route } = this.context;
+    if (route.path === 'edit-outfit') {
+      fetch(`/api/outfit/${this.props.outfitId}`, {
+        headers: {
+          'x-access-token': localStorage.getItem('jwt')
+        }
+      })
+        .then(res => res.json())
+        .then(outfit => {
+          this.setState({
+            outfitName: outfit.outfitName,
+            outfitImg: outfit.outfitImg,
+            category: outfit.category,
+            bottoms: outfit.bottoms,
+            makeup: outfit.makeup,
+            loading: false,
+            error: false
+          });
+        })
+        .catch(() => {
+          this.setState({ error: true });
+        });
+    } else {
+      this.setState({ loading: false });
+    }
   }
 
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    if (name === 'image') {
+      this.setState({ flag: true });
+    }
   }
 
   handleSubmit(event) {
@@ -34,11 +65,16 @@ export default class OutfitForm extends React.Component {
 
     const formData = new FormData();
     formData.append('outfitName', this.state.outfitName);
-    formData.append('image', this.fileInputRef.current.files[0]);
     formData.append('category', this.state.category);
     formData.append('bottoms', this.state.bottoms);
     formData.append('makeup', this.state.makeup);
     formData.append('star', this.state.star);
+    formData.append('flag', this.state.flag);
+    if (this.fileInputRef.current.files[0] === undefined) {
+      formData.append('outfitImg', this.state.outfitImg);
+    } else {
+      formData.append('image', this.fileInputRef.current.files[0]);
+    }
 
     if (route.path === 'create-outfit') {
       const req = {
@@ -49,6 +85,20 @@ export default class OutfitForm extends React.Component {
         body: formData
       };
       fetch('/api/create/outfit', req)
+        .then(res => res.json())
+        .then(result => {
+          window.location.hash = '#outfits';
+        });
+    } else if (route.path === 'edit-outfit') {
+      const req = {
+        method: 'PUT',
+        headers: {
+          'x-access-token': localStorage.getItem('jwt')
+        },
+        body: formData
+      };
+      const outfitId = this.props.outfitId;
+      fetch(`/api/edit/outfit/${outfitId}`, req)
         .then(res => res.json())
         .then(result => {
           window.location.hash = '#outfits';
@@ -105,14 +155,16 @@ export default class OutfitForm extends React.Component {
         <div className='mb-4'>
           <p>Dress Picture:</p>
           <input
-            required
             id='outfitImg'
             type="file"
             name="image"
             ref={this.fileInputRef}
             accept=".png, .jpg, .jpeg"
-            value={this.state.outfitImg}
+            // value={this.state.outfitImg}
             onChange={handleChange} />
+          {route.path === 'edit-outfit' &&
+            <div className='mt-2'><a href={this.state.outfitImg} target="_blank" rel="noreferrer">Click here to see current file.</a></div>
+            }
         </div>
         <div className='mb-4'>
           <p>Category:</p>
@@ -123,20 +175,23 @@ export default class OutfitForm extends React.Component {
               type="radio"
               name="category"
               value="Synchro"
+              checked={this.state.category === 'Synchro'}
               onChange={handleChange} />
             <label htmlFor='Synchro' className='pe-3 pe-m-5 ms-m-1'>Synchro</label>
             <input
-              id='Singles'
+              id='Single'
               type="radio"
               name="category"
-              value="Singles"
+              value="Single"
+              checked={this.state.category === 'Single'}
               onChange={handleChange} />
-            <label htmlFor='Singles' className='pe-3 pe-m-5 ms-m-1'>Singles</label>
+            <label htmlFor='Single' className='pe-3 pe-m-5 ms-m-1'>Single</label>
             <input
               id='Dance'
               type="radio"
               name="category"
               value="Dance"
+              checked={this.state.category === 'Dance'}
               onChange={handleChange} />
             <label htmlFor='Dance' className='pe-3 pe-m-5 ms-m-1'>Dance</label>
             <input
@@ -144,6 +199,7 @@ export default class OutfitForm extends React.Component {
               type="radio"
               name="category"
               value="Pairs"
+              checked={this.state.category === 'Pairs'}
               onChange={handleChange} />
             <label htmlFor='Pairs' className='ms-m-1'>Pairs</label>
           </div>
