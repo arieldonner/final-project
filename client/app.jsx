@@ -9,6 +9,7 @@ import CreateOutfitPage from './pages/create-outfit';
 import OutfitDetails from './components/outfit-details';
 import EditOutfitPage from './pages/edit-outfit';
 import NotFound from './components/not-found';
+import About from './pages/about';
 import { parseRoute, AppContext } from './lib';
 
 export default class App extends React.Component {
@@ -77,6 +78,9 @@ export default class App extends React.Component {
       const params = new URLSearchParams(queryString);
       const outfitId = params.get('outfitId');
       return <EditOutfitPage outfitId={outfitId} />;
+    }
+    if (path === 'about') {
+      return <About />;
     }
     return <NotFound />;
   }
