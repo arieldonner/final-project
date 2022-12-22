@@ -11,7 +11,7 @@ export default class OutfitForm extends React.Component {
       bottoms: '',
       makeup: '',
       star: false,
-      show: false,
+      isOpen: false,
       flag: false,
       loading: true,
       error: false
@@ -108,11 +108,22 @@ export default class OutfitForm extends React.Component {
   }
 
   handleModal(event) {
-
+    event.preventDefault();
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   handleDelete(event) {
-
+    event.preventDefault();
+    fetch(`/api/delete/outfit/${this.props.outfitId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('jwt')
+      }
+    })
+      .then(res => {
+        window.location.hash = '#outfits';
+      });
   }
 
   render() {
@@ -127,7 +138,7 @@ export default class OutfitForm extends React.Component {
                 <h4 className='my-modal-title'>Delete Event</h4>
               </div>
               <div className='my-modal-body'>
-                Are you sure you want to delete this event? This process cannot be undone.
+                Are you sure you want to delete this outfit? This process cannot be undone.
               </div>
               <div className='my-modal-footer d-flex justify-content-end gap-3'>
                 <button className='btn btn-outline-secondary' onClick={this.handleModal}>Cancel</button>
@@ -160,7 +171,6 @@ export default class OutfitForm extends React.Component {
             name="image"
             ref={this.fileInputRef}
             accept=".png, .jpg, .jpeg"
-            // value={this.state.outfitImg}
             onChange={handleChange} />
           {route.path === 'edit-outfit' &&
             <div className='mt-2'><a href={this.state.outfitImg} target="_blank" rel="noreferrer">Click here to see current file.</a></div>
@@ -229,7 +239,7 @@ export default class OutfitForm extends React.Component {
           <label htmlFor="star">Favorite this outfit</label>
         </div>
         <div className='d-flex justify-content-center'>
-          {route.path === 'edit-event' && <button onClick={this.handleModal} className='btn btn-outline-danger'>Delete Event</button>}
+          {route.path === 'edit-outfit' && <button onClick={this.handleModal} className='btn btn-outline-danger'>Delete Outfit</button>}
         </div>
       </form>
     );
