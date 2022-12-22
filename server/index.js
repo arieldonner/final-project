@@ -322,6 +322,30 @@ app.put('/api/edit/outfit/:outfitId', uploadsMiddleware, (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/delete/outfit/:outfitId', (req, res, next) => {
+  const outfitId = Number(req.params.outfitId);
+  if (!outfitId) {
+    throw new ClientError(400, 'outfitId must be a positive integer');
+  }
+  const sql = `
+    delete
+        from "outfits"
+      where "outfitId" = $1
+      returning *
+      `;
+  const params = [outfitId];
+  db.query(sql, params)
+    .then(result => {
+      const event = result.rows[0];
+      if (!event) {
+        throw new ClientError(404, `Cannot find event with outfitId ${outfitId}`);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
