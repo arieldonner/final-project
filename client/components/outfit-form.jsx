@@ -113,7 +113,17 @@ export default class OutfitForm extends React.Component {
   }
 
   handleDelete(event) {
-
+    event.preventDefault();
+    fetch(`/api/delete/outfit/${this.props.outfitId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('jwt')
+      }
+    })
+      .then(res => {
+        window.location.hash = '#outfits';
+      });
   }
 
   render() {
@@ -128,7 +138,7 @@ export default class OutfitForm extends React.Component {
                 <h4 className='my-modal-title'>Delete Event</h4>
               </div>
               <div className='my-modal-body'>
-                Are you sure you want to delete this event? This process cannot be undone.
+                Are you sure you want to delete this outfit? This process cannot be undone.
               </div>
               <div className='my-modal-footer d-flex justify-content-end gap-3'>
                 <button className='btn btn-outline-secondary' onClick={this.handleModal}>Cancel</button>
