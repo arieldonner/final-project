@@ -11,7 +11,7 @@ export default class OutfitForm extends React.Component {
       bottoms: '',
       makeup: '',
       star: false,
-      show: false,
+      isOpen: false,
       flag: false,
       loading: true,
       error: false
@@ -108,7 +108,8 @@ export default class OutfitForm extends React.Component {
   }
 
   handleModal(event) {
-
+    event.preventDefault();
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   handleDelete(event) {
@@ -160,7 +161,6 @@ export default class OutfitForm extends React.Component {
             name="image"
             ref={this.fileInputRef}
             accept=".png, .jpg, .jpeg"
-            // value={this.state.outfitImg}
             onChange={handleChange} />
           {route.path === 'edit-outfit' &&
             <div className='mt-2'><a href={this.state.outfitImg} target="_blank" rel="noreferrer">Click here to see current file.</a></div>
@@ -229,7 +229,7 @@ export default class OutfitForm extends React.Component {
           <label htmlFor="star">Favorite this outfit</label>
         </div>
         <div className='d-flex justify-content-center'>
-          {route.path === 'edit-event' && <button onClick={this.handleModal} className='btn btn-outline-danger'>Delete Event</button>}
+          {route.path === 'edit-outfit' && <button onClick={this.handleModal} className='btn btn-outline-danger'>Delete Outfit</button>}
         </div>
       </form>
     );
