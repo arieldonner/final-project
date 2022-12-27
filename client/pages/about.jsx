@@ -25,10 +25,25 @@ export default class About extends React.Component {
               </div>
               <p className='col-5 text-end'>Click on the icons to toggle between calendar and list view.</p>
             </div>
-            <div>
+            <div className='d-flex align-items-center p-3'>
               <p>Edit details by clicking on an event tile.</p>
+              <div className='tile col-sm-12 col-md-11 col-lg-6 ps-4'>
+                <div className='row align-items-center justify-content-between'>
+                  <div className='col-8 col-lg-6'>
+                    <h3 className='blue'>Competition</h3>
+                    <p className='black'>Location: <span className='blue'>Irvine</span></p>
+                  </div>
+                  <div className='col-4 col-md-4 text-end'>
+                    <p className='mb-1 black'>9:30 AM</p>
+                    <p className='black'>10:30 AM</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
+            <div className='d-flex align-items-center p-3'>
+              <div className='circle'>
+                <img src='https://litb-cgis.rightinthebox.com/images/384x500/202110/bps/product/inc/fqdfpu1635163742663.jpg' alt='Outft image' className='outfit-img' />
+              </div>
               <p>Save your outfits for each competition. View and edit details by clicking on an outfit tile.</p>
             </div>
           </div>
