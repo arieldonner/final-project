@@ -395,3 +395,11 @@ body {
 hr {
   border: 2px solid #76baff;
 }
+
+.about-text {
+  font-size: 1.1rem;
+}
+
+.about-heading {
+  font-weight: bold;
+}
