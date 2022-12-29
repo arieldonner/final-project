@@ -403,3 +403,11 @@ hr {
 .about-heading {
   font-weight: bold;
 }
+
+.no-pointer {
+  cursor: default;
+}
+
+.about-icons {
+  transform: scale(2.3);
+}
