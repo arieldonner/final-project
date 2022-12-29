@@ -411,3 +411,7 @@ hr {
 .about-icons {
   transform: scale(2.3);
 }
+
+.no-transition:hover {
+  background-color: #1976d2;
+}

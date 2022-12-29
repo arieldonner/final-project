@@ -17,7 +17,7 @@ export default class About extends React.Component {
             </div>
             <div className='d-flex align-items-center justify-content-between p-1 p-md-2 ps-lg-5 pe-lg-5 pt-lg-2 mb-lg-2'>
               <p className='col-9 col-md-8 col-lg-8 about-text'>Add skating competitions, practices, and events to your calendar.</p>
-              <p className='btn btn-primary col-3 col-lg-2 no-pointer'>New+</p>
+              <p className='btn btn-primary col-3 col-lg-2 no-pointer no-transition'>New+</p>
             </div>
             <div className='d-flex align-items-center justify-content-between p-1 p-md-2 ps-lg-5 pe-lg-5 pt-lg-2 mb-lg-2'>
               <div className='pe-5 ps-4 mb-4'>
