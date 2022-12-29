@@ -106,7 +106,8 @@ body {
   -webkit-text-stroke: 0.5px black;
 }
 
-.fa-rectangle-list {
+.fa-rectangle-list,
+.fa-calendar-days {
   transform: scale(2);
   color: #1976d2;
   cursor: pointer;
@@ -384,4 +385,33 @@ body {
   width: 250px;
   height: 250px;
   margin-top: -1.5rem;
+}
+
+/* About Page */
+.shrink {
+  transform: scale(0.8);
+}
+
+hr {
+  border: 2px solid #76baff;
+}
+
+.about-text {
+  font-size: 1.2rem;
+}
+
+.about-heading {
+  font-weight: bold;
+}
+
+.no-pointer {
+  cursor: default;
+}
+
+.about-icons {
+  transform: scale(2.3);
+}
+
+.no-transition:hover {
+  background-color: #1976d2;
 }
