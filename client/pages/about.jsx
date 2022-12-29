@@ -12,7 +12,7 @@ export default class About extends React.Component {
           </div>
           <div className='container d-flex flex-column justify-content-center tile col-sm-12 col-md-8 col-lg-6 ps-4 pt-1 mb-3'>
             <div>
-              <h2 className='blue pt-3 text-center about-heading'>Stay organized this competition season!</h2>
+              <h2 className='blue pt-3 ps-lg-5 pe-lg-5 text-center about-heading'>Stay organized for your competition season!</h2>
               <hr />
             </div>
             <div className='d-flex align-items-center justify-content-between p-1 p-md-2 ps-lg-5 pe-lg-5 pt-lg-2 mb-lg-2'>
@@ -45,7 +45,7 @@ export default class About extends React.Component {
               <div className='circle col-5'>
                 <img src='https://litb-cgis.rightinthebox.com/images/384x500/202110/bps/product/inc/fqdfpu1635163742663.jpg' alt='Outft image' className='outfit-img' />
               </div>
-              <p className='col-7 col-lg-7 pe-3 pe-lg-0 text-end about-text'>Save your outfits for each competition. View and edit details by clicking on an outfit tile.</p>
+              <p className='col-7 col-lg-8 pe-3 pe-lg-0 text-end about-text'>Save your outfits for each competition. View and edit details by clicking on an outfit tile.</p>
             </div>
           </div>
         </div>
