@@ -106,7 +106,7 @@ export default class Navbar extends React.Component {
                 <a href='#outfits' className='nav-links p-0'>Outfits</a>
               </div>
               <div className='col-1 ps-3'>
-                <a href='#' className='nav-links p-0'>About</a>
+                <a href='#about' className='nav-links p-0'>About</a>
               </div>
               <div className='col ps-3'>
                 <a href='#' className='nav-links p-0' onClick={handleSignOut}>
