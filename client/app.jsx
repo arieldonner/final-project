@@ -10,6 +10,7 @@ import OutfitDetails from './components/outfit-details';
 import EditOutfitPage from './pages/edit-outfit';
 import NotFound from './components/not-found';
 import About from './pages/about';
+import Upcoming from './pages/upcoming';
 import { parseRoute, AppContext } from './lib';
 
 export default class App extends React.Component {
@@ -81,6 +82,9 @@ export default class App extends React.Component {
     }
     if (path === 'about') {
       return <About />;
+    }
+    if (path === 'upcoming') {
+      return <Upcoming />;
     }
     return <NotFound />;
   }
