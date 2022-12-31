@@ -51,20 +51,23 @@ export default class Upcoming extends React.Component {
               <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
             </div>
           }
-          <div className='row justify-content-center'>
+          <div className='d-flex flex-column align-items-center justify-content-center'>
             {this.state.upcoming.map(event => (
-              <a key={event.eventId} href={`#edit-event?eventId=${event.eventId}`} className='tile col-sm-12 col-md-11 col-lg-10 ps-4 mb-3 text-decoration-none tile-hover'>
-                <div className='row align-items-center'>
-                  <div className='col-8 col-lg-9'>
-                    <h3 className='blue'>{event.eventName}</h3>
-                    <p className='black'>Location: <span className='blue'>{event.locationName}</span></p>
+              <div key={event.eventId} className='col-12 d-flex flex-column align-items-center'>
+                <h3>{event.startDate}</h3>
+                <a href={`#edit-event?eventId=${event.eventId}`} className='tile col-sm-12 col-md-10 col-lg-4 ps-4 mb-3 text-decoration-none tile-hover'>
+                  <div className='row align-items-center'>
+                    <div className='col-8 col-lg-9'>
+                      <h3 className='blue'>{event.eventName}</h3>
+                      <p className='black'>Location: <span className='blue'>{event.locationName}</span></p>
+                    </div>
+                    <div className='col-4 col-md-3 text-end pe-4'>
+                      <p className='mb-1 black'>{convertTime(event.startTime)}</p>
+                      <p className='black'>{convertTime(event.endTime)}</p>
+                    </div>
                   </div>
-                  <div className='col-4 col-md-3 text-end pe-4'>
-                    <p className='mb-1 black'>{convertTime(event.startTime)}</p>
-                    <p className='black'>{convertTime(event.endTime)}</p>
-                  </div>
-                </div>
-              </a>
+                </a>
+              </div>
             ))}
           </div>
         </div>
