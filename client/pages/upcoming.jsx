@@ -6,7 +6,7 @@ import NotFound from '../components/not-found';
 export default class Upcoming extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: new Date(), events: [], loading: true, error: false };
+    this.state = { value: new Date(), events: [], upcoming: [], loading: true, error: false };
   }
 
   componentDidMount() {
@@ -17,7 +17,15 @@ export default class Upcoming extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.setState({ events: res, loading: false, error: false });
+        const upcomingArr = [];
+        for (let i = 0; i < res.length; i++) {
+          const oneDay = new Date(res[i].startDate.slice(0, 10));
+          const converted = oneDay.toISOString();
+          if (converted > this.state.value.toISOString()) {
+            upcomingArr.push(res[i]);
+          }
+        }
+        this.setState({ events: res, upcoming: upcomingArr, loading: false, error: false });
       })
       .catch(() => {
         this.setState({ error: true });
@@ -26,12 +34,6 @@ export default class Upcoming extends React.Component {
 
   render() {
     // console.log(this.state);
-    for (let i = 0; i < this.state.events.length; i++) {
-      const oneDay = new Date(this.state.events[i].startDate.slice(0, 10));
-      if (oneDay > this.state.value) {
-        // console.log(oneDay);
-      }
-    }
     return (
       <div>
         <Navbar />
