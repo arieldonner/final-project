@@ -1,12 +1,13 @@
 import React from 'react';
 import Navbar from '../components/navbar';
 import NotFound from '../components/not-found';
-import { convertTime } from '../lib';
+import EventTile from '../components/event-tile';
+// import { convertTime } from '../lib';
 
 export default class Upcoming extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: new Date(), events: [], upcoming: [], loading: true, error: false };
+    this.state = { value: new Date(), events: [], upcoming: [], dates: [], loading: true, error: false };
   }
 
   componentDidMount() {
@@ -18,14 +19,27 @@ export default class Upcoming extends React.Component {
       .then(res => res.json())
       .then(res => {
         const upcomingArr = [];
+        const dates = [];
         for (let i = 0; i < res.length; i++) {
           const oneDay = new Date(res[i].startDate.slice(0, 10));
           const converted = oneDay.toISOString();
           if (converted > this.state.value.toISOString()) {
             upcomingArr.push(res[i]);
+            dates.push(res[i].startDate);
           }
         }
-        this.setState({ events: res, upcoming: upcomingArr, loading: false, error: false });
+        const unique = dates.filter((v, i, a) => a.indexOf(v) === i);
+        // console.log(unique);
+        const copy = upcomingArr.map(obj => {
+          return { ...obj, startDate: new Date(obj.startDate) };
+        });
+        const sorted = copy.sort(
+          (objA, objB) => Number(objA.startDate) - Number(objB.startDate)
+        );
+        const fixed = sorted.map(obj => {
+          return { ...obj, startDate: obj.startDate.toISOString() };
+        });
+        this.setState({ events: res, upcoming: fixed, dates: unique, loading: false, error: false });
       })
       .catch(() => {
         this.setState({ error: true });
@@ -52,7 +66,13 @@ export default class Upcoming extends React.Component {
             </div>
           }
           <div className='d-flex flex-column align-items-center justify-content-center'>
-            {this.state.upcoming.map(event => (
+            {this.state.dates.map((event, index) => (
+              <div key={index} className='col-sm-12 col-md-6 order-sm-2 order-md-1'>
+                <h1 className='text-center'>{event.slice(0, 10)}</h1>
+                <EventTile value={new Date(event)}/>
+              </div>
+            ))}
+            {/* {this.state.upcoming.map(event => (
               <div key={event.eventId} className='col-12 d-flex flex-column align-items-center'>
                 <h3>{event.startDate}</h3>
                 <a href={`#edit-event?eventId=${event.eventId}`} className='tile col-sm-12 col-md-10 col-lg-4 ps-4 mb-3 text-decoration-none tile-hover'>
@@ -68,7 +88,7 @@ export default class Upcoming extends React.Component {
                   </div>
                 </a>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
