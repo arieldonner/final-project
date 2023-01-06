@@ -58,7 +58,7 @@ export default class Upcoming extends React.Component {
               <div className='col-12'>
                 {this.state.dates.map((event, index) => (
                   <div key={index} className='col-12'>
-                    <h1 className='date mb-3'>{event.slice(0, 10)}</h1>
+                    <h1 className='date mb-3'>{new Date(event).toString().slice(0, 16)}</h1>
                     <EventTile value={new Date(event)} />
                   </div>
                 ))}
