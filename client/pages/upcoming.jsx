@@ -53,7 +53,7 @@ export default class Upcoming extends React.Component {
           <h1 className="heading cookie">Upcoming Events</h1>
           <div className='d-flex align-items-center justify-content-center'>
             <a href='#'><i className="fa-solid fa-calendar-days" /></a>
-            <a href='#create-event' className='btn btn-primary col-3 col-lg-1 offset-4 offset-md-1'>New+</a>
+            <a href='#create-event' className='btn btn-primary col-3 col-md-2 col-lg-1 offset-7 offset-md-3 offset-lg-4'>New+</a>
           </div>
           {this.state.error === true &&
             <NotFound />
@@ -63,13 +63,17 @@ export default class Upcoming extends React.Component {
               <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
             </div>
           }
-          <div className='d-flex flex-column align-items-center justify-content-center'>
-            {this.state.dates.map((event, index) => (
-              <div key={index} className='col-sm-12 col-md-6 order-sm-2 order-md-1'>
-                <h1 className='text-center'>{event.slice(0, 10)}</h1>
-                <EventTile value={new Date(event)}/>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-sm-12 col-md-6 order-sm-2 order-md-1'>
+                {this.state.dates.map((event, index) => (
+                  <div key={index} className='col-sm-12 col-md-6 order-sm-2 order-md-1'>
+                    <h1 className='text-center blue'>{event.slice(0, 10)}</h1>
+                    <EventTile value={new Date(event)} />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
