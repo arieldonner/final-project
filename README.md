@@ -36,7 +36,7 @@ Try the application live at [https://ice-time.arieldonner.com/](https://ice-time
 - User can edit an outfit
 - User can delete an outfit
 - User can view an info page about the site
-- User can view a list of upcoming scheduled events (pending)
+- User can view a list of upcoming scheduled events
 
 ## Stretch Features
 
