@@ -32,15 +32,15 @@ Try the application live at [https://ice-time.arieldonner.com/](https://ice-time
 - User can delete an entry for an event
 - User can create a new outfit
 - User can view a list of all saved outfits
-- User can view details for an outfit (pending)
-- User can edit an outfit (pending)
-- User can delete an outfit (pending)
-- User can view an info page about the site (pending)
-- User can view a list of upcoming scheduled events (pending)
-- User can favorite an outfit (pending)
+- User can view details for an outfit
+- User can edit an outfit
+- User can delete an outfit
+- User can view an info page about the site
+- User can view a list of upcoming scheduled events
 
 ## Stretch Features
 
+- User can favorite an outfit
 - User can set a date range for events
 - User can share events
 - User can share outfits

@@ -18,9 +18,12 @@ export default class EventTile extends React.Component {
       .then(res => res.json())
       .then(res => {
         if (!Response.ok) {
-          this.setState({ event: null, error: false });
+          this.setState({ event: null, loading: false, error: false });
         }
-        this.setState({ event: res, error: false });
+        const sorted = res.sort(function (a, b) {
+          return a.startTime.localeCompare(b.startTime);
+        });
+        this.setState({ event: sorted, loading: false, error: false });
       })
       .catch(() => {
         this.setState({ error: true });
@@ -39,9 +42,12 @@ export default class EventTile extends React.Component {
         .then(res => res.json())
         .then(res => {
           if (!Response.ok) {
-            this.setState({ event: null, loading: false });
+            this.setState({ event: null, loading: false, error: false });
           }
-          this.setState({ event: res, loading: false });
+          const sorted = res.sort(function (a, b) {
+            return a.startTime.localeCompare(b.startTime);
+          });
+          this.setState({ event: sorted, loading: false, error: false });
         })
         .catch(() => {
           this.setState({ error: true });
@@ -77,7 +83,7 @@ export default class EventTile extends React.Component {
           </div>
         }
         {this.state.event.map(event => (
-          <a key={event.eventId} href={`#edit-event?eventId=${event.eventId}`} className='tile col-sm-12 col-md-11 col-lg-10 ps-4 mb-3 text-decoration-none tile-hover'>
+          <a key={event.eventId} href={`#edit-event?eventId=${event.eventId}`} className='tile col-12 col-md-11 col-lg-10 ps-4 mb-3 text-decoration-none tile-hover'>
             <div className='row align-items-center'>
               <div className='col-8 col-lg-9'>
                 <h3 className='blue'>{event.eventName}</h3>

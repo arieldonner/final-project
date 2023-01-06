@@ -45,8 +45,8 @@ export default class CalendarPage extends React.Component {
           }
           <div className='row'>
             <div className='col-sm-12 col-md-6 order-sm-1 order-md-2'>
-              <div className='row align-items-center justify-content-center mb-3 ms-lg-5 ps-3 ps-md-0'>
-                <i className="fa-regular fa-rectangle-list col-3" />
+              <div className='row align-items-center justify-content-center mb-3 ms-lg-6 ps-3 ps-md-0'>
+                <a href='#upcoming' className='col-3'><i className="fa-regular fa-rectangle-list" /></a>
                 <a href='#create-event' className='btn btn-primary col-3 col-lg-2 offset-4 offset-md-1'>New+</a>
               </div>
               <div className='row justify-content-center'>
