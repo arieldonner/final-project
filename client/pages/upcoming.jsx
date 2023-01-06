@@ -50,10 +50,10 @@ export default class Upcoming extends React.Component {
       <div>
         <Navbar />
         <div className="container-fluid">
-          <h1 className="heading cookie">Upcoming Events</h1>
-          <div className='d-flex align-items-center justify-content-center'>
+          <h1 className="heading cookie">Upcoming</h1>
+          <div className='d-flex align-items-center justify-content-center mb-2'>
             <a href='#'><i className="fa-solid fa-calendar-days" /></a>
-            <a href='#create-event' className='btn btn-primary col-3 col-md-2 col-lg-1 offset-7 offset-md-3 offset-lg-4'>New+</a>
+            <a href='#create-event' className='btn btn-primary col-3 col-md-2 col-lg-1 offset-7 offset-md-5 offset-lg-3'>New+</a>
           </div>
           {this.state.error === true &&
             <NotFound />
@@ -63,11 +63,11 @@ export default class Upcoming extends React.Component {
               <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
             </div>
           }
-          <div className='container'>
+          <div className='container d-flex flex-column align-items-center justify-content-center'>
             <div className='row'>
-              <div className='col-sm-12 col-md-6 order-sm-2 order-md-1'>
+              <div className='col-12'>
                 {this.state.dates.map((event, index) => (
-                  <div key={index} className='col-sm-12 col-md-6 order-sm-2 order-md-1'>
+                  <div key={index} className='col-12'>
                     <h1 className='text-center blue'>{event.slice(0, 10)}</h1>
                     <EventTile value={new Date(event)} />
                   </div>
