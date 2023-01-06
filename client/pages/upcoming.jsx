@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from '../components/navbar';
 import NotFound from '../components/not-found';
 import EventTile from '../components/event-tile';
-// import { convertTime } from '../lib';
 
 export default class Upcoming extends React.Component {
   constructor(props) {
@@ -47,7 +46,6 @@ export default class Upcoming extends React.Component {
   }
 
   render() {
-    // console.log(this.state);
     return (
       <div>
         <Navbar />
@@ -72,23 +70,6 @@ export default class Upcoming extends React.Component {
                 <EventTile value={new Date(event)}/>
               </div>
             ))}
-            {/* {this.state.upcoming.map(event => (
-              <div key={event.eventId} className='col-12 d-flex flex-column align-items-center'>
-                <h3>{event.startDate}</h3>
-                <a href={`#edit-event?eventId=${event.eventId}`} className='tile col-sm-12 col-md-10 col-lg-4 ps-4 mb-3 text-decoration-none tile-hover'>
-                  <div className='row align-items-center'>
-                    <div className='col-8 col-lg-9'>
-                      <h3 className='blue'>{event.eventName}</h3>
-                      <p className='black'>Location: <span className='blue'>{event.locationName}</span></p>
-                    </div>
-                    <div className='col-4 col-md-3 text-end pe-4'>
-                      <p className='mb-1 black'>{convertTime(event.startTime)}</p>
-                      <p className='black'>{convertTime(event.endTime)}</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            ))} */}
           </div>
         </div>
       </div>
