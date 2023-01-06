@@ -28,17 +28,7 @@ export default class Upcoming extends React.Component {
           }
         }
         const unique = dates.filter((v, i, a) => a.indexOf(v) === i);
-        // console.log(unique);
-        const copy = upcomingArr.map(obj => {
-          return { ...obj, startDate: new Date(obj.startDate) };
-        });
-        const sorted = copy.sort(
-          (objA, objB) => Number(objA.startDate) - Number(objB.startDate)
-        );
-        const fixed = sorted.map(obj => {
-          return { ...obj, startDate: obj.startDate.toISOString() };
-        });
-        this.setState({ events: res, upcoming: fixed, dates: unique, loading: false, error: false });
+        this.setState({ events: res, upcoming: upcomingArr, dates: unique, loading: false, error: false });
       })
       .catch(() => {
         this.setState({ error: true });
@@ -68,7 +58,7 @@ export default class Upcoming extends React.Component {
               <div className='col-12'>
                 {this.state.dates.map((event, index) => (
                   <div key={index} className='col-12'>
-                    <h1 className='text-center blue'>{event.slice(0, 10)}</h1>
+                    <h1 className='date mb-3'>{event.slice(0, 10)}</h1>
                     <EventTile value={new Date(event)} />
                   </div>
                 ))}
