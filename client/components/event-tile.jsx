@@ -18,9 +18,12 @@ export default class EventTile extends React.Component {
       .then(res => res.json())
       .then(res => {
         if (!Response.ok) {
-          this.setState({ event: null, error: false });
+          this.setState({ event: null, loading: false, error: false });
         }
-        this.setState({ event: res, error: false });
+        const sorted = res.sort(function (a, b) {
+          return a.startTime.localeCompare(b.startTime);
+        });
+        this.setState({ event: sorted, loading: false, error: false });
       })
       .catch(() => {
         this.setState({ error: true });
@@ -39,9 +42,12 @@ export default class EventTile extends React.Component {
         .then(res => res.json())
         .then(res => {
           if (!Response.ok) {
-            this.setState({ event: null, loading: false });
+            this.setState({ event: null, loading: false, error: false });
           }
-          this.setState({ event: res, loading: false });
+          const sorted = res.sort(function (a, b) {
+            return a.startTime.localeCompare(b.startTime);
+          });
+          this.setState({ event: sorted, loading: false, error: false });
         })
         .catch(() => {
           this.setState({ error: true });
