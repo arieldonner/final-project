@@ -89,7 +89,7 @@ export default class EventTile extends React.Component {
                 <h3 className='blue'>{event.eventName}</h3>
                 <p className='black'>Location: <span className='blue'>{event.locationName}</span></p>
               </div>
-              <div className='col-4 col-md-3 text-end pe-4'>
+              <div className='col-4 col-md-3 text-end pe-4 pe-md-0 pe-lg-4'>
                 <p className='mb-1 black'>{convertTime(event.startTime)}</p>
                 <p className='black'>{convertTime(event.endTime)}</p>
               </div>
