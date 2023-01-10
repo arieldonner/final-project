@@ -36,6 +36,7 @@ export default class Upcoming extends React.Component {
   }
 
   render() {
+    // console.log(this.state);
     return (
       <div>
         <Navbar />
@@ -53,11 +54,11 @@ export default class Upcoming extends React.Component {
               <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
             </div>
           }
-          <div className='container d-flex flex-column align-items-center justify-content-center'>
+          <div className='container d-flex flex-column align-items-stretch justify-content-center'>
             <div className='row'>
-              <div className='col-12'>
+              <div className='col-12 d-flex flex-column align-items-center'>
                 {this.state.dates.map((event, index) => (
-                  <div key={index} className='col-12'>
+                  <div key={index} className='col-12 col-md-9 col-lg-6'>
                     <h1 className='date mb-3'>{new Date(event).toString().slice(0, 16)}</h1>
                     <EventTile value={new Date(event)} />
                   </div>
