@@ -22,7 +22,9 @@ export default class Upcoming extends React.Component {
         for (let i = 0; i < res.length; i++) {
           const oneDay = new Date(res[i].startDate.slice(0, 10));
           const converted = oneDay.toISOString();
-          if (converted > this.state.value.toISOString()) {
+          const tzoffset = (new Date()).getTimezoneOffset() * 60000;
+          const localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+          if (converted > localISOTime) {
             upcomingArr.push(res[i]);
             const newDate = new Date(res[i].startDate);
             dateObj.push(new Date(newDate.getTime() + Math.abs(newDate.getTimezoneOffset() * 60000)));
@@ -31,7 +33,9 @@ export default class Upcoming extends React.Component {
         const sorted = dateObj.sort(
           (objA, objB) => Number(objA) - Number(objB)
         );
-        const unique = sorted.filter((v, i, a) => a.indexOf(v) === i);
+        // const unique = sorted.filter((v, i, a) => a.indexOf(v) === i);
+        const unique = sorted.filter((date, i, self) =>
+          self.findIndex(d => d.getTime() === date.getTime()) === i);
         this.setState({ events: res, upcoming: upcomingArr, dates: unique, loading: false, error: false });
       })
       .catch(() => {
@@ -40,7 +44,6 @@ export default class Upcoming extends React.Component {
   }
 
   render() {
-    // console.log(this.state);
     return (
       <div>
         <Navbar />
