@@ -18,16 +18,23 @@ export default class Upcoming extends React.Component {
       .then(res => res.json())
       .then(res => {
         const upcomingArr = [];
-        const dates = [];
+        const dateObj = [];
         for (let i = 0; i < res.length; i++) {
           const oneDay = new Date(res[i].startDate.slice(0, 10));
           const converted = oneDay.toISOString();
-          if (converted > this.state.value.toISOString()) {
+          const tzoffset = (new Date()).getTimezoneOffset() * 60000;
+          const localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+          if (converted > localISOTime) {
             upcomingArr.push(res[i]);
-            dates.push(res[i].startDate);
+            const newDate = new Date(res[i].startDate);
+            dateObj.push(new Date(newDate.getTime() + Math.abs(newDate.getTimezoneOffset() * 60000)));
           }
         }
-        const unique = dates.filter((v, i, a) => a.indexOf(v) === i);
+        const sorted = dateObj.sort(
+          (objA, objB) => Number(objA) - Number(objB)
+        );
+        const unique = sorted.filter((date, i, self) =>
+          self.findIndex(d => d.getTime() === date.getTime()) === i);
         this.setState({ events: res, upcoming: upcomingArr, dates: unique, loading: false, error: false });
       })
       .catch(() => {
@@ -53,11 +60,11 @@ export default class Upcoming extends React.Component {
               <div className="lds-default"><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /></div>
             </div>
           }
-          <div className='container d-flex flex-column align-items-center justify-content-center'>
+          <div className='container d-flex flex-column align-items-stretch justify-content-center'>
             <div className='row'>
-              <div className='col-12'>
+              <div className='col-12 d-flex flex-column align-items-center'>
                 {this.state.dates.map((event, index) => (
-                  <div key={index} className='col-12'>
+                  <div key={index} className='col-12 col-md-9 col-lg-6'>
                     <h1 className='date mb-3'>{new Date(event).toString().slice(0, 16)}</h1>
                     <EventTile value={new Date(event)} />
                   </div>
