@@ -18,15 +18,14 @@ export default class Upcoming extends React.Component {
       .then(res => res.json())
       .then(res => {
         const upcomingArr = [];
-        const dates = [];
         const dateObj = [];
         for (let i = 0; i < res.length; i++) {
           const oneDay = new Date(res[i].startDate.slice(0, 10));
           const converted = oneDay.toISOString();
           if (converted > this.state.value.toISOString()) {
             upcomingArr.push(res[i]);
-            dateObj.push(new Date(res[i].startDate.slice(0, 10)));
-            dates.push(res[i].startDate);
+            const newDate = new Date(res[i].startDate);
+            dateObj.push(new Date(newDate.getTime() + Math.abs(newDate.getTimezoneOffset() * 60000)));
           }
         }
         const sorted = dateObj.sort(
