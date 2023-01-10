@@ -33,7 +33,6 @@ export default class Upcoming extends React.Component {
         const sorted = dateObj.sort(
           (objA, objB) => Number(objA) - Number(objB)
         );
-        // const unique = sorted.filter((v, i, a) => a.indexOf(v) === i);
         const unique = sorted.filter((date, i, self) =>
           self.findIndex(d => d.getTime() === date.getTime()) === i);
         this.setState({ events: res, upcoming: upcomingArr, dates: unique, loading: false, error: false });
