@@ -19,15 +19,20 @@ export default class Upcoming extends React.Component {
       .then(res => {
         const upcomingArr = [];
         const dates = [];
+        const dateObj = [];
         for (let i = 0; i < res.length; i++) {
           const oneDay = new Date(res[i].startDate.slice(0, 10));
           const converted = oneDay.toISOString();
           if (converted > this.state.value.toISOString()) {
             upcomingArr.push(res[i]);
+            dateObj.push(new Date(res[i].startDate.slice(0, 10)));
             dates.push(res[i].startDate);
           }
         }
-        const unique = dates.filter((v, i, a) => a.indexOf(v) === i);
+        const sorted = dateObj.sort(
+          (objA, objB) => Number(objA) - Number(objB)
+        );
+        const unique = sorted.filter((v, i, a) => a.indexOf(v) === i);
         this.setState({ events: res, upcoming: upcomingArr, dates: unique, loading: false, error: false });
       })
       .catch(() => {
