@@ -34,7 +34,6 @@ CREATE TABLE "public"."outfits" (
 	"category" TEXT NOT NULL,
 	"bottoms" TEXT,
 	"makeup" TEXT,
-	"attachment" TEXT,
 	"star" BOOLEAN NOT NULL,
 	CONSTRAINT "outfits_pk" PRIMARY KEY ("outfitId")
 ) WITH (

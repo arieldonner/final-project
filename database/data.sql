@@ -19,7 +19,6 @@ insert into "outfits" (
   "category",
   "bottoms",
   "makeup",
-  "attachment",
   "star"
 ) values (
   1,
@@ -28,7 +27,6 @@ insert into "outfits" (
   'Synchro',
   'tan in boot',
   'nuetral tones',
-  null,
   false
 ), (
   1,
@@ -37,7 +35,6 @@ insert into "outfits" (
   'Single',
   'tan in boot',
   'nuetral tones',
-  null,
   false
 );
 
