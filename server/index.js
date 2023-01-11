@@ -306,11 +306,12 @@ app.put('/api/edit/outfit/:outfitId', uploadsMiddleware, (req, res, next) => {
           "outfitImg" = $2,
           "category" = $3,
           "bottoms" = $4,
-          "makeup" = $5
-      where "outfitId" = $6
+          "makeup" = $5,
+          "star" = $6
+      where "outfitId" = $7
       returning *
       `;
-  const params = [editOutfit.outfitName, outfitImg, editOutfit.category, editOutfit.bottoms, editOutfit.makeup, outfitId];
+  const params = [editOutfit.outfitName, outfitImg, editOutfit.category, editOutfit.bottoms, editOutfit.makeup, editOutfit.star, outfitId];
   db.query(sql, params)
     .then(result => {
       const event = result.rows[0];
