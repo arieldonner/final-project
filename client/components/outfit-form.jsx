@@ -39,6 +39,7 @@ export default class OutfitForm extends React.Component {
             category: outfit.category,
             bottoms: outfit.bottoms,
             makeup: outfit.makeup,
+            star: outfit.star,
             loading: false,
             error: false
           });
@@ -235,7 +236,7 @@ export default class OutfitForm extends React.Component {
             className="form-control" />
         </div>
         <div className='mb-4'>
-          <input type="checkbox" id="star" name="star" value={true} className='me-2'/>
+          <input type="checkbox" id="star" name="star" value={true} checked={this.state.star} onChange={handleChange} className='me-2'/>
           <label htmlFor="star">Favorite this outfit</label>
         </div>
         <div className='d-flex justify-content-center'>

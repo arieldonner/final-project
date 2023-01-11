@@ -5,7 +5,8 @@ export default class AuthForm extends React.Component {
     super(props);
     this.state = {
       userName: 'username',
-      password: 'password1'
+      password: 'password1',
+      incorrect: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +30,9 @@ export default class AuthForm extends React.Component {
     fetch(`/api/auth/${action}`, req)
       .then(res => res.json())
       .then(result => {
+        if (action === 'sign-in' && !Response.ok) {
+          this.setState({ incorrect: true });
+        }
         if (action === 'sign-up') {
           window.location.hash = 'sign-in';
         } else if (result.user && result.token) {
@@ -79,6 +83,11 @@ export default class AuthForm extends React.Component {
             onChange={handleChange}
             className="form-control" />
           </div>
+          {this.state.incorrect === true &&
+            <div>
+              <p className='red'>Incorrect username or password. Please try again.</p>
+            </div>
+          }
           <div className='d-flex justify-content-center mb-4'>
             <button type='submit' className='btn btn-primary col-12'>{submitButtonText}</button>
           </div>
