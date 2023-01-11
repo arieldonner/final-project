@@ -47,14 +47,14 @@ insert into "events" (
   "userId"
 ) values (
   'Competition',
-  '11-11-2022',
+  '02-05-2023',
   '9:30AM',
   '10:30PM',
   'Irvine',
   1
 ), (
   'Practice',
-  '11-13-2022',
+  '10-20-2023',
   '6:30PM',
   '8:30PM',
   'Simi Valley',
