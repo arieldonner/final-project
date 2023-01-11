@@ -48,7 +48,7 @@ export default class Upcoming extends React.Component {
         <Navbar />
         <div className="container-fluid">
           <h1 className="heading cookie">Upcoming</h1>
-          <div className='d-flex align-items-center justify-content-center mb-2'>
+          <div className='d-flex align-items-center justify-content-center mb-3'>
             <a href='#'><i className="fa-solid fa-calendar-days" /></a>
             <a href='#create-event' className='btn btn-primary col-3 col-md-2 col-lg-1 offset-7 offset-md-5 offset-lg-3'>New+</a>
           </div>
