@@ -20,7 +20,8 @@ export default class ViewOutfits extends React.Component {
         if (res.length === 0) {
           this.setState({ outfits: null, loading: false, error: false });
         } else {
-          this.setState({ outfits: res, loading: false, error: false });
+          const sorted = res.sort((a, b) => b.star - a.star);
+          this.setState({ outfits: sorted, loading: false, error: false });
         }
       })
       .catch(() => {
