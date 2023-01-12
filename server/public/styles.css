@@ -387,6 +387,11 @@ body {
   margin-top: -1.5rem;
 }
 
+.fa-star {
+  transform: scale(1.8);
+  color: rgb(246, 240, 59);
+}
+
 /* About Page */
 .shrink {
   transform: scale(0.8);

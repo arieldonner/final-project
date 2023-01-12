@@ -62,8 +62,13 @@ export default class OutfitDetails extends React.Component {
                 <img src={this.state.outfitImg} alt='Outft image' className='outfit-img' />
               </div>
             </div>
-            <div>
-              <h2 className='blue pb-2'>{this.state.outfitName}</h2>
+            <div className='d-flex align-items-center pb-2'>
+              <div className='pe-3'>
+                <h2 className='blue'>{this.state.outfitName}</h2>
+              </div>
+              {this.state.star === true &&
+                <i className="fa-solid fa-star pb-1" />
+              }
             </div>
             <div className='d-flex'>
               {this.state.category === 'Synchro' &&
