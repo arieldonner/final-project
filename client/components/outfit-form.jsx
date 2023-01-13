@@ -58,6 +58,9 @@ export default class OutfitForm extends React.Component {
     if (name === 'image') {
       this.setState({ flag: true });
     }
+    if (name === 'star') {
+      this.setState({ star: !this.state.star });
+    }
   }
 
   handleSubmit(event) {

@@ -388,8 +388,10 @@ body {
 }
 
 .fa-star {
-  transform: scale(1.8);
-  color: rgb(246, 240, 59);
+  transform: scale(1.5);
+  color: #1976d2;
+
+  /* color: rgb(246, 240, 59); */
 }
 
 /* About Page */

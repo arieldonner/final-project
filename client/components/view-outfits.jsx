@@ -66,8 +66,13 @@ export default class ViewOutfits extends React.Component {
                 <div className='circle'>
                   <img src={event.outfitImg} alt='Outft image' className='outfit-img' />
                 </div>
-                <div className='d-flex flex-column justify-content-center'>
-                  <h2 className='blue pb-2'>{event.outfitName}</h2>
+                <div className='d-flex flex-column justify-content-center pb-2'>
+                  <div className='d-flex align-items-center'>
+                    <h2 className='blue pe-3'>{event.outfitName}</h2>
+                    {event.star === true &&
+                      <i className="fa-solid fa-star pb-1" />
+                    }
+                  </div>
                   {event.category === 'Synchro' &&
                     <span className='my-badge pink-back'>{event.category}</span>
                   }
